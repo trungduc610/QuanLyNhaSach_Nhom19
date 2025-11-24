@@ -1,0 +1,105 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|e:\\luudulieusinhvien\\quanly_nhasach\\quanly_nhasach\\frm_dangnhap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|solutionrelative:frm_dangnhap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|e:\\luudulieusinhvien\\quanly_nhasach\\quanly_nhasach\\frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|solutionrelative:frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|e:\\luudulieusinhvien\\quanly_nhasach\\quanly_nhasach\\ucqlnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|solutionrelative:ucqlnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|e:\\luudulieusinhvien\\quanly_nhasach\\quanly_nhasach\\ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|solutionrelative:ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|e:\\luudulieusinhvien\\quanly_nhasach\\quanly_nhasach\\uctaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach.csproj|solutionrelative:uctaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "UCTaiKhoan.cs",
+              "DocumentMoniker": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTaiKhoan.cs",
+              "RelativeDocumentMoniker": "UCTaiKhoan.cs",
+              "ToolTip": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTaiKhoan.cs",
+              "RelativeToolTip": "UCTaiKhoan.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T10:19:14.738Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "UCQLSach.cs",
+              "DocumentMoniker": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs",
+              "RelativeDocumentMoniker": "UCQLSach.cs",
+              "ToolTip": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs",
+              "RelativeToolTip": "UCQLSach.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T10:19:12.463Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "UCQLNhanVien.cs",
+              "DocumentMoniker": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLNhanVien.cs",
+              "RelativeDocumentMoniker": "UCQLNhanVien.cs",
+              "ToolTip": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLNhanVien.cs",
+              "RelativeToolTip": "UCQLNhanVien.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T10:19:05.685Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frm_Themtaikhoan.cs",
+              "DocumentMoniker": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs",
+              "RelativeDocumentMoniker": "frm_Themtaikhoan.cs",
+              "ToolTip": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs",
+              "RelativeToolTip": "frm_Themtaikhoan.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAACXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T10:15:11.595Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frm_Dangnhap.cs",
+              "DocumentMoniker": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Dangnhap.cs",
+              "RelativeDocumentMoniker": "frm_Dangnhap.cs",
+              "ToolTip": "E:\\luudulieusinhvien\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Dangnhap.cs",
+              "RelativeToolTip": "frm_Dangnhap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-21T09:34:58.224Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
