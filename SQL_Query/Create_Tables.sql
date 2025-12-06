@@ -23,19 +23,16 @@ CREATE TABLE NHACUNGCAP(
 CREATE TABLE SACH(
     MaSach CHAR(10) PRIMARY KEY NOT NULL,
     ID_TheLoai INT NOT NULL,
-    Ma_Nha_Cung_Cap CHAR(10) NOT NULL,
     TenSach NVARCHAR(100) NOT NULL,
     TacGia NVARCHAR(100),
     Nha_Xuat_Ban NVARCHAR(100),
     Nam_Xuat_Ban INT,
-    GiaNhap DECIMAL(18,0) DEFAULT 0, -- Thêm giá nhập
-    GiaBan DECIMAL(18,0) DEFAULT 0,  -- Đổi sang (18,0) cho VNĐ
+    GiaNhap DECIMAL(18,0) DEFAULT 0,
+    GiaBan DECIMAL(18,0) DEFAULT 0,  
     SoLuong INT NOT NULL DEFAULT 0,
 
     CONSTRAINT FK_Sach_TheLoai FOREIGN KEY(ID_TheLoai) 
-        REFERENCES THELOAI(ID_TheLoai),
-    CONSTRAINT FK_Sach_NhaCungCap FOREIGN KEY(Ma_Nha_Cung_Cap) 
-        REFERENCES NHACUNGCAP(Ma_Nha_Cung_Cap)
+        REFERENCES THELOAI(ID_TheLoai)
 );
 
 --Bảng khách hàng
@@ -63,7 +60,7 @@ CREATE TABLE TAIKHOAN(
     TenDangNhap VARCHAR(50) PRIMARY KEY NOT NULL,
     MatKhau VARCHAR(50) NOT NULL,
     Ma_Nhan_Vien CHAR(10) NOT NULL UNIQUE, -- Liên kết 1-1 với Nhân viên
-    Quyen VARCHAR(20) NOT NULL DEFAULT 'NhanVien', -- 'Admin' hoặc 'NhanVien'
+    Quyen VARCHAR(20) NOT NULL DEFAULT 'NhanVien', 
     NgayTao DATE DEFAULT GETDATE(),
 
     CONSTRAINT FK_TaiKhoan_NhanVien FOREIGN KEY(Ma_Nhan_Vien)
@@ -77,7 +74,7 @@ CREATE TABLE HOADON(
     Ma_Nhan_Vien CHAR(10) NOT NULL,
     Ma_Khach_Hang CHAR(10) NOT NULL,
     NgayLap DATE NOT NULL,
-    NgayTao DATETIME DEFAULT GETDATE(), -- Thêm ngày giờ tạo chính xác
+    NgayTao DATETIME DEFAULT GETDATE(), 
     TongTien DECIMAL(18,0) DEFAULT 0,
 
     CONSTRAINT FK_HoaDon_NhanVien FOREIGN KEY(Ma_Nhan_Vien) 
@@ -91,12 +88,12 @@ CREATE TABLE CHITIETHOADON(
     Ma_Hoa_Don CHAR(10) NOT NULL,
     MaSach CHAR(10) NOT NULL,
     SoLuong INT,
-    DonGia DECIMAL(18,0) DEFAULT 0, -- Thêm cột DonGia (snapshot giá)
+    DonGia DECIMAL(18,0) DEFAULT 0, 
     ThanhTien DECIMAL(18,0) DEFAULT 0,
 
     PRIMARY KEY(Ma_Hoa_Don,MaSach),
     CONSTRAINT FK_ChiTietHoaDon_HoaDon FOREIGN KEY (Ma_Hoa_Don) 
-        REFERENCES HOADON(Ma_Hoa_Don) ON DELETE CASCADE, -- Nếu xóa Hóa đơn thì xóa luôn chi tiết
+        REFERENCES HOADON(Ma_Hoa_Don) ON DELETE CASCADE, 
     CONSTRAINT FK_ChiTietHoaDon_Sach FOREIGN KEY (MaSach) 
         REFERENCES SACH(MaSach)
 );

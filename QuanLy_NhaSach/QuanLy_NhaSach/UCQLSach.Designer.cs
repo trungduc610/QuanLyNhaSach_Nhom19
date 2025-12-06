@@ -52,8 +52,6 @@
             this.txtGiaNhap = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
             this.txtTacGia = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cboNhaCungCap = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtGiaBan = new System.Windows.Forms.TextBox();
             this.pnlChucNang = new System.Windows.Forms.Panel();
@@ -182,20 +180,18 @@
             this.tableLayoutPanel1.Controls.Add(this.txtMaSach, 1, 0);
             this.tableLayoutPanel1.Controls.Add(this.label1, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.txtSoLuong, 3, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label7, 4, 0);
-            this.tableLayoutPanel1.Controls.Add(this.txtNhaXuatBan, 5, 0);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.txtTenSach, 1, 1);
             this.tableLayoutPanel1.Controls.Add(this.label8, 2, 1);
             this.tableLayoutPanel1.Controls.Add(this.cboTheLoai, 3, 1);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 4, 1);
-            this.tableLayoutPanel1.Controls.Add(this.txtGiaNhap, 5, 1);
             this.tableLayoutPanel1.Controls.Add(this.label6, 0, 2);
             this.tableLayoutPanel1.Controls.Add(this.txtTacGia, 1, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label10, 2, 2);
-            this.tableLayoutPanel1.Controls.Add(this.cboNhaCungCap, 3, 2);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 4, 2);
-            this.tableLayoutPanel1.Controls.Add(this.txtGiaBan, 5, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label7, 2, 2);
+            this.tableLayoutPanel1.Controls.Add(this.txtNhaXuatBan, 3, 2);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 4, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 4, 1);
+            this.tableLayoutPanel1.Controls.Add(this.txtGiaNhap, 5, 0);
+            this.tableLayoutPanel1.Controls.Add(this.txtGiaBan, 5, 1);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(10, 37);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -222,7 +218,7 @@
             this.txtMaSach.Location = new System.Drawing.Point(123, 11);
             this.txtMaSach.Name = "txtMaSach";
             this.txtMaSach.Size = new System.Drawing.Size(223, 34);
-            this.txtMaSach.TabIndex = 1;
+            this.txtMaSach.TabIndex = 0;
             // 
             // label1
             // 
@@ -231,7 +227,7 @@
             this.label1.Location = new System.Drawing.Point(352, 14);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(96, 28);
-            this.label1.TabIndex = 2;
+            this.label1.TabIndex = 15;
             this.label1.Text = "Số lượng:";
             // 
             // txtSoLuong
@@ -246,7 +242,7 @@
             // 
             this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(749, 14);
+            this.label7.Location = new System.Drawing.Point(352, 129);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(132, 28);
             this.label7.TabIndex = 4;
@@ -255,9 +251,9 @@
             // txtNhaXuatBan
             // 
             this.txtNhaXuatBan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtNhaXuatBan.Location = new System.Drawing.Point(906, 11);
+            this.txtNhaXuatBan.Location = new System.Drawing.Point(496, 126);
             this.txtNhaXuatBan.Name = "txtNhaXuatBan";
-            this.txtNhaXuatBan.Size = new System.Drawing.Size(299, 34);
+            this.txtNhaXuatBan.Size = new System.Drawing.Size(247, 34);
             this.txtNhaXuatBan.TabIndex = 5;
             // 
             // label5
@@ -291,7 +287,7 @@
             // cboTheLoai
             // 
             this.cboTheLoai.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboTheLoai.Location = new System.Drawing.Point(496, 73);
+            this.cboTheLoai.Location = new System.Drawing.Point(496, 67);
             this.cboTheLoai.Name = "cboTheLoai";
             this.cboTheLoai.Size = new System.Drawing.Size(247, 36);
             this.cboTheLoai.TabIndex = 9;
@@ -300,7 +296,7 @@
             // 
             this.label3.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(749, 71);
+            this.label3.Location = new System.Drawing.Point(749, 14);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(94, 28);
             this.label3.TabIndex = 10;
@@ -309,7 +305,7 @@
             // txtGiaNhap
             // 
             this.txtGiaNhap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtGiaNhap.Location = new System.Drawing.Point(906, 68);
+            this.txtGiaNhap.Location = new System.Drawing.Point(906, 11);
             this.txtGiaNhap.Name = "txtGiaNhap";
             this.txtGiaNhap.Size = new System.Drawing.Size(299, 34);
             this.txtGiaNhap.TabIndex = 11;
@@ -332,29 +328,11 @@
             this.txtTacGia.Size = new System.Drawing.Size(223, 34);
             this.txtTacGia.TabIndex = 13;
             // 
-            // label10
-            // 
-            this.label10.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(352, 129);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(136, 28);
-            this.label10.TabIndex = 14;
-            this.label10.Text = "Nhà cung cấp:";
-            // 
-            // cboNhaCungCap
-            // 
-            this.cboNhaCungCap.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.cboNhaCungCap.Location = new System.Drawing.Point(496, 131);
-            this.cboNhaCungCap.Name = "cboNhaCungCap";
-            this.cboNhaCungCap.Size = new System.Drawing.Size(247, 36);
-            this.cboNhaCungCap.TabIndex = 15;
-            // 
             // label2
             // 
             this.label2.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(749, 129);
+            this.label2.Location = new System.Drawing.Point(749, 71);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 28);
             this.label2.TabIndex = 16;
@@ -363,7 +341,7 @@
             // txtGiaBan
             // 
             this.txtGiaBan.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtGiaBan.Location = new System.Drawing.Point(906, 126);
+            this.txtGiaBan.Location = new System.Drawing.Point(906, 68);
             this.txtGiaBan.Name = "txtGiaBan";
             this.txtGiaBan.Size = new System.Drawing.Size(299, 34);
             this.txtGiaBan.TabIndex = 17;
@@ -430,8 +408,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cboTheLoai;
-        private System.Windows.Forms.ComboBox cboNhaCungCap;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.TextBox txtNhaXuatBan;
         private System.Windows.Forms.TextBox txtGiaNhap;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;

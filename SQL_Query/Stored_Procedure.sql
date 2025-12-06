@@ -2,7 +2,7 @@
 GO
 
 --SP cập nhật CHI_TIET_HOA_DON.thanh_tien
-CREATE PROC SP_UPDATE_CHI_TIET_HOA_DON_THANH_TIEN
+CREATE OR ALTER PROC SP_UPDATE_CHI_TIET_HOA_DON_THANH_TIEN
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -13,11 +13,13 @@ BEGIN
          FROM SACH
          WHERE SACH.MaSach = CHITIETHOADON.MaSach);
 END;
+GO
 
-EXEC SP_UPDATE_CHI_TIET_HOA_DON_THANH_TIEN;
+EXEC SP_UPDATE_CHI_TIET_HOA_DON_THANH_TIEN
+GO
 
 --SP cập nhật HOA_DON.tong_tien
-CREATE PROC SP_UPDATE_HOA_DON_TONG_TIEN
+CREATE OR ALTER PROC SP_UPDATE_HOA_DON_TONG_TIEN
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -28,11 +30,13 @@ BEGIN
          FROM CHITIETHOADON
          WHERE CHITIETHOADON.Ma_Hoa_Don = HOADON.Ma_Hoa_Don);
 END;
+GO
 
-EXEC SP_UPDATE_HOA_DON_TONG_TIEN;
+EXEC SP_UPDATE_HOA_DON_TONG_TIEN
+GO
 
 --  SP cập nhật CHI_TIET_PHIEU_NHAP.ThanhTienNhap
-CREATE PROC SP_UPDATE_CHI_TIET_PHIEU_NHAP_THANH_TIEN
+CREATE OR ALTER PROC SP_UPDATE_CHI_TIET_PHIEU_NHAP_THANH_TIEN
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -45,9 +49,10 @@ END;
 GO
 
 EXEC SP_UPDATE_CHI_TIET_PHIEU_NHAP_THANH_TIEN
+GO
 
 --  SP cập nhật PHIEU_NHAP_HANG.TongTienNhap
-CREATE PROC SP_UPDATE_PHIEU_NHAP_TONG_TIEN
+CREATE OR ALTER PROC SP_UPDATE_PHIEU_NHAP_TONG_TIEN
 AS
 BEGIN
     SET NOCOUNT ON;
@@ -61,10 +66,10 @@ END;
 GO
 
 EXEC SP_UPDATE_PHIEU_NHAP_TONG_TIEN
-
+GO
 
 -- 3. SP cho chức năng Báo Cáo Doanh Thu
-CREATE PROCEDURE SP_ThongKeDoanhThuTheoNgay
+CREATE OR ALTER PROCEDURE SP_ThongKeDoanhThuTheoNgay
     @TuNgay DATE,
     @DenNgay DATE
 AS
@@ -86,7 +91,7 @@ END
 GO
 
 -- 4. SP để xem chi tiết một hóa đơn
-CREATE PROCEDURE SP_LayChiTietHoaDon
+CREATE OR ALTER PROCEDURE SP_LayChiTietHoaDon
     @Ma_Hoa_Don CHAR(10)
 AS
 BEGIN
@@ -106,7 +111,7 @@ END
 GO
 
 -- 5. SP để xem chi tiết một phiếu NHẬP
-CREATE PROCEDURE SP_LayChiTietPhieuNhap
+CREATE OR ALTER PROCEDURE SP_LayChiTietPhieuNhap
     @MaPhieuNhap CHAR(10)
 AS
 BEGIN
@@ -129,7 +134,7 @@ GO
 -- SP Đăng nhập và đổi mật khẩu
 
 -- SP đăng nhập
-CREATE PROCEDURE SP_DangNhap
+CREATE OR ALTER PROCEDURE SP_DangNhap
     @TenDangNhap VARCHAR(50),
     @MatKhau VARCHAR(50) -- Nhận mật khẩu thô
 AS
@@ -150,7 +155,7 @@ BEGIN
 END
 GO
 -- 2. SP Lấy danh sách tài khoản (cho Admin xem)
-CREATE PROCEDURE SP_LayDanhSachTaiKhoan
+CREATE OR ALTER PROCEDURE SP_LayDanhSachTaiKhoan
 AS
 BEGIN
     SELECT 
@@ -163,7 +168,7 @@ END
 GO
 
 -- 3. SP Lấy danh sách nhân viên CHƯA có tài khoản (để tạo)
-CREATE PROCEDURE SP_LayNhanVienChuaCoTaiKhoan
+CREATE OR ALTER PROCEDURE SP_LayNhanVienChuaCoTaiKhoan
 AS
 BEGIN
     SELECT 
@@ -177,7 +182,7 @@ END
 GO
 
 -- 4. SP Tạo tài khoản mới (Admin đăng ký cho nhân viên)
-CREATE PROCEDURE SP_TaoTaiKhoan
+CREATE OR ALTER PROCEDURE SP_TaoTaiKhoan
     @TenDangNhap VARCHAR(50),
     @MatKhau VARCHAR(50),
     @Ma_Nhan_Vien CHAR(10),
@@ -202,7 +207,7 @@ END
 GO
 
 -- SP mới để xóa tài khoản bằng Mã NV
-CREATE PROCEDURE SP_XoaTaiKhoanTheoMaNV
+CREATE OR ALTER PROCEDURE SP_XoaTaiKhoanTheoMaNV
     @Ma_Nhan_Vien CHAR(10)
 AS
 BEGIN
@@ -213,7 +218,7 @@ END
 GO
 
 --SP Đổi mật khẩu
-CREATE PROCEDURE SP_DoiMatKhau
+CREATE OR ALTER PROCEDURE SP_DoiMatKhau
     @TenDangNhap VARCHAR(50),
     @MatKhauCu VARCHAR(50),
     @MatKhauMoi VARCHAR(50)
@@ -253,7 +258,7 @@ GO
 IF OBJECT_ID('SP_LayDanhSachNhanVien', 'P') IS NOT NULL
     DROP PROCEDURE SP_LayDanhSachNhanVien;
 GO
-CREATE PROCEDURE SP_LayDanhSachNhanVien
+CREATE OR ALTER PROCEDURE SP_LayDanhSachNhanVien
 AS
 BEGIN
     SELECT 
@@ -281,7 +286,7 @@ GO
 IF OBJECT_ID('SP_ThemNhanVien', 'P') IS NOT NULL
     DROP PROCEDURE SP_ThemNhanVien;
 GO
-CREATE PROCEDURE SP_ThemNhanVien
+CREATE OR ALTER PROCEDURE SP_ThemNhanVien
     @Ma_Nhan_Vien CHAR(10), -- <<< THAM SỐ MỚI
     @Ten_Nhan_Vien NVARCHAR(100),
     @NgaySinh DATE,
@@ -310,7 +315,7 @@ GO
 IF OBJECT_ID('SP_SuaNhanVien', 'P') IS NOT NULL
     DROP PROCEDURE SP_SuaNhanVien;
 GO
-CREATE PROCEDURE SP_SuaNhanVien
+CREATE OR ALTER PROCEDURE SP_SuaNhanVien
     @Ma_Nhan_Vien CHAR(10),
     @Ten_Nhan_Vien NVARCHAR(100),
     @NgaySinh DATE,
@@ -335,7 +340,7 @@ GO
 IF OBJECT_ID('SP_XoaNhanVien', 'P') IS NOT NULL
     DROP PROCEDURE SP_XoaNhanVien;
 GO
-CREATE PROCEDURE SP_XoaNhanVien
+CREATE OR ALTER PROCEDURE SP_XoaNhanVien
     @Ma_Nhan_Vien CHAR(10)
 AS
 BEGIN
@@ -358,7 +363,7 @@ GO
 IF OBJECT_ID('SP_LayDanhSachSach', 'P') IS NOT NULL
     DROP PROCEDURE SP_LayDanhSachSach;
 GO
-CREATE PROCEDURE SP_LayDanhSachSach
+CREATE OR ALTER PROCEDURE SP_LayDanhSachSach
 AS
 BEGIN
     SELECT 
@@ -367,15 +372,12 @@ BEGIN
         S.TacGia,
         S.Nha_Xuat_Ban,
         TL.Ten_TheLoai,     
-        NCC.Ten_Nha_Cung_Cap, 
         S.GiaNhap,
         S.GiaBan,
         S.SoLuong,
-        S.ID_TheLoai,         -- Lấy ID để xử lý CellClick
-        S.Ma_Nha_Cung_Cap     -- Lấy ID để xử lý CellClick
+        S.ID_TheLoai        
     FROM SACH AS S
     JOIN THELOAI AS TL ON S.ID_TheLoai = TL.ID_TheLoai
-    JOIN NHACUNGCAP AS NCC ON S.Ma_Nha_Cung_Cap = NCC.Ma_Nha_Cung_Cap;
 END
 GO
 
@@ -383,7 +385,7 @@ GO
 IF OBJECT_ID('SP_LayDanhSachTheLoai', 'P') IS NOT NULL
     DROP PROCEDURE SP_LayDanhSachTheLoai;
 GO
-CREATE PROCEDURE SP_LayDanhSachTheLoai
+CREATE OR ALTER PROCEDURE SP_LayDanhSachTheLoai
 AS
 BEGIN
     SELECT ID_TheLoai, Ten_TheLoai FROM THELOAI;
@@ -394,7 +396,7 @@ GO
 IF OBJECT_ID('SP_LayDanhSachNhaCungCap', 'P') IS NOT NULL
     DROP PROCEDURE SP_LayDanhSachNhaCungCap;
 GO
-CREATE PROCEDURE SP_LayDanhSachNhaCungCap
+CREATE OR ALTER PROCEDURE SP_LayDanhSachNhaCungCap
 AS
 BEGIN
     SELECT Ma_Nha_Cung_Cap, Ten_Nha_Cung_Cap FROM NHACUNGCAP;
@@ -405,10 +407,9 @@ GO
 IF OBJECT_ID('SP_ThemSach', 'P') IS NOT NULL
     DROP PROCEDURE SP_ThemSach;
 GO
-CREATE PROCEDURE SP_ThemSach
+CREATE OR ALTER PROCEDURE SP_ThemSach
     @MaSach CHAR(10),
     @ID_TheLoai INT,
-    @Ma_Nha_Cung_Cap CHAR(10),
     @TenSach NVARCHAR(100),
     @TacGia NVARCHAR(100),
     @Nha_Xuat_Ban NVARCHAR(100),
@@ -423,8 +424,8 @@ BEGIN
         RETURN;
     END
     
-    INSERT INTO SACH (MaSach, ID_TheLoai, Ma_Nha_Cung_Cap, TenSach, TacGia, Nha_Xuat_Ban, GiaNhap, GiaBan, SoLuong)
-    VALUES (@MaSach, @ID_TheLoai, @Ma_Nha_Cung_Cap, @TenSach, @TacGia, @Nha_Xuat_Ban, @GiaNhap, @GiaBan, @SoLuong);
+    INSERT INTO SACH (MaSach, ID_TheLoai, TenSach, TacGia, Nha_Xuat_Ban, GiaNhap, GiaBan, SoLuong)
+    VALUES (@MaSach, @ID_TheLoai, @TenSach, @TacGia, @Nha_Xuat_Ban, @GiaNhap, @GiaBan, @SoLuong);
 END
 GO
 
@@ -432,22 +433,19 @@ GO
 IF OBJECT_ID('SP_SuaSach', 'P') IS NOT NULL
     DROP PROCEDURE SP_SuaSach;
 GO
-CREATE PROCEDURE SP_SuaSach
+CREATE OR ALTER PROCEDURE SP_SuaSach
     @MaSach CHAR(10),
     @ID_TheLoai INT,
-    @Ma_Nha_Cung_Cap CHAR(10),
     @TenSach NVARCHAR(100),
     @TacGia NVARCHAR(100),
     @Nha_Xuat_Ban NVARCHAR(100),
     @GiaNhap DECIMAL(18,0),
     @GiaBan DECIMAL(18,0)
-    -- Không có @SoLuong, vì Số lượng chỉ được sửa qua Nhập/Bán
 AS
 BEGIN
     UPDATE SACH
     SET 
         ID_TheLoai = @ID_TheLoai,
-        Ma_Nha_Cung_Cap = @Ma_Nha_Cung_Cap,
         TenSach = @TenSach,
         TacGia = @TacGia,
         Nha_Xuat_Ban = @Nha_Xuat_Ban,
@@ -462,7 +460,7 @@ GO
 IF OBJECT_ID('SP_XoaSach', 'P') IS NOT NULL
     DROP PROCEDURE SP_XoaSach;
 GO
-CREATE PROCEDURE SP_XoaSach
+CREATE OR ALTER PROCEDURE SP_XoaSach
     @MaSach CHAR(10)
 AS
 BEGIN
@@ -478,7 +476,7 @@ IF OBJECT_ID('SP_TimKiemSach', 'P') IS NOT NULL
     DROP PROCEDURE SP_TimKiemSach;
 GO
 
-CREATE PROCEDURE SP_TimKiemSach
+CREATE OR ALTER PROCEDURE SP_TimKiemSach
     @TuKhoa NVARCHAR(100)
 AS
 BEGIN
@@ -495,12 +493,9 @@ BEGIN
         S.GiaBan,
         S.SoLuong,
         TL.Ten_TheLoai,
-        NCC.Ten_Nha_Cung_Cap,
-        S.ID_TheLoai,      
-        S.Ma_Nha_Cung_Cap 
+        S.ID_TheLoai
     FROM SACH AS S
     JOIN THELOAI AS TL ON S.ID_TheLoai = TL.ID_TheLoai
-    JOIN NHACUNGCAP AS NCC ON S.Ma_Nha_Cung_Cap = NCC.Ma_Nha_Cung_Cap
     WHERE
         S.TenSach LIKE @TuKhoa
         OR S.TacGia LIKE @TuKhoa
@@ -508,11 +503,10 @@ BEGIN
 END;
 GO
 
-select * from SACH
 
 --Quản lý khách hàng--
 
-CREATE PROCEDURE SP_LayDanhSachKhachHang
+CREATE OR ALTER PROCEDURE SP_LayDanhSachKhachHang
 AS
 BEGIN
     SELECT * FROM KHACHHANG;
@@ -520,7 +514,7 @@ END
 GO
 
 -- 2. Thêm khách hàng
-CREATE PROCEDURE SP_ThemKhachHang
+CREATE OR ALTER PROCEDURE SP_ThemKhachHang
     @Ma_Khach_Hang CHAR(10),
     @Ten_Khach_Hang NVARCHAR(100),
     @So_Dien_Thoai VARCHAR(20),
@@ -537,7 +531,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE SP_SuaKhachHang
+CREATE OR ALTER PROCEDURE SP_SuaKhachHang
     @Ma_Khach_Hang CHAR(10),
     @Ten_Khach_Hang NVARCHAR(100),
     @So_Dien_Thoai VARCHAR(20),
@@ -554,7 +548,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE SP_XoaKhachHang
+CREATE OR ALTER PROCEDURE SP_XoaKhachHang
     @Ma_Khach_Hang CHAR(10)
 AS
 BEGIN
@@ -562,7 +556,7 @@ BEGIN
 END
 GO
 
-CREATE PROCEDURE SP_TimKiemKhachHang
+CREATE OR ALTER PROCEDURE SP_TimKiemKhachHang
     @TuKhoa NVARCHAR(100)
 AS
 BEGIN
@@ -580,7 +574,7 @@ GO
 IF OBJECT_ID('SP_BaoCaoTaiChinh', 'P') IS NOT NULL
     DROP PROCEDURE SP_BaoCaoTaiChinh;
 GO
-CREATE PROCEDURE SP_BaoCaoTaiChinh
+CREATE OR ALTER PROCEDURE SP_BaoCaoTaiChinh
     @TuNgay DATE,
     @DenNgay DATE
 AS

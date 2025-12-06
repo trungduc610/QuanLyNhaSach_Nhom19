@@ -8,6 +8,7 @@ namespace QuanLy_NhaSach
     public partial class UCQLSach : UserControl
     {
         string connectionString = @"Data Source=DESKTOP-DF0P4U3\SQLEXPRESS;Initial Catalog=NhaSach;User ID=sa;Password=123;Encrypt=True;TrustServerCertificate=True";
+
         public UCQLSach()
         {
             InitializeComponent();
@@ -16,7 +17,7 @@ namespace QuanLy_NhaSach
         private void UCQLSach_Load(object sender, EventArgs e)
         {
             LoadDataGridView();
-            LoadComboBoxes();
+            LoadComboBoxes(); 
             LamMoiForm();
 
             dgvSach.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -39,19 +40,19 @@ namespace QuanLy_NhaSach
                     adapter.Fill(dt);
                     dgvSach.DataSource = dt;
 
+                    // Định dạng tiêu đề cột
                     dgvSach.Columns["MaSach"].HeaderText = "Mã Sách";
                     dgvSach.Columns["TenSach"].HeaderText = "Tên Sách";
                     dgvSach.Columns["Ten_TheLoai"].HeaderText = "Thể Loại";
-                    dgvSach.Columns["Ten_Nha_Cung_Cap"].HeaderText = "Nhà Cung Cấp";
                     dgvSach.Columns["TacGia"].HeaderText = "Tác Giả";
                     dgvSach.Columns["Nha_Xuat_Ban"].HeaderText = "Nhà Xuất Bản";
                     dgvSach.Columns["SoLuong"].HeaderText = "Số Lượng";
                     dgvSach.Columns["GiaNhap"].HeaderText = "Giá Nhập";
                     dgvSach.Columns["GiaBan"].HeaderText = "Giá Bán";
 
-                    // Ẩn các cột ID (chỉ dùng để xử lý)
-                    dgvSach.Columns["ID_TheLoai"].Visible = false;
-                    dgvSach.Columns["Ma_Nha_Cung_Cap"].Visible = false;
+                    if (dgvSach.Columns.Contains("ID_TheLoai"))
+                        dgvSach.Columns["ID_TheLoai"].Visible = false;
+
                 }
             }
             catch (Exception ex)
@@ -68,19 +69,13 @@ namespace QuanLy_NhaSach
                 {
                     conn.Open();
 
+                    // 1. Load Thể Loại
                     SqlDataAdapter adapterTL = new SqlDataAdapter("SP_LayDanhSachTheLoai", conn);
                     DataTable dtTL = new DataTable();
                     adapterTL.Fill(dtTL);
                     cboTheLoai.DataSource = dtTL;
                     cboTheLoai.DisplayMember = "Ten_TheLoai";
                     cboTheLoai.ValueMember = "ID_TheLoai";
-
-                    SqlDataAdapter adapterNCC = new SqlDataAdapter("SP_LayDanhSachNhaCungCap", conn);
-                    DataTable dtNCC = new DataTable();
-                    adapterNCC.Fill(dtNCC);
-                    cboNhaCungCap.DataSource = dtNCC;
-                    cboNhaCungCap.DisplayMember = "Ten_Nha_Cung_Cap";
-                    cboNhaCungCap.ValueMember = "Ma_Nha_Cung_Cap";
                 }
             }
             catch (Exception ex)
@@ -99,7 +94,7 @@ namespace QuanLy_NhaSach
             txtGiaBan.Clear();
             txtSoLuong.Text = "0";
             cboTheLoai.SelectedIndex = -1;
-            cboNhaCungCap.SelectedIndex = -1;
+
             dgvSach.ClearSelection();
 
             txtMaSach.ReadOnly = false;
@@ -113,18 +108,20 @@ namespace QuanLy_NhaSach
         private void dgvSach_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
+            if (e.RowIndex >= dgvSach.Rows.Count) return;
+
             DataGridViewRow row = dgvSach.Rows[e.RowIndex];
 
-            txtMaSach.Text = row.Cells["MaSach"].Value.ToString();
-            txtTenSach.Text = row.Cells["TenSach"].Value.ToString();
-            txtTacGia.Text = row.Cells["TacGia"].Value.ToString();
-            txtNhaXuatBan.Text = row.Cells["Nha_Xuat_Ban"].Value.ToString();
-            txtGiaNhap.Text = row.Cells["GiaNhap"].Value.ToString();
-            txtGiaBan.Text = row.Cells["GiaBan"].Value.ToString();
-            txtSoLuong.Text = row.Cells["SoLuong"].Value.ToString();
+            txtMaSach.Text = row.Cells["MaSach"].Value?.ToString();
+            txtTenSach.Text = row.Cells["TenSach"].Value?.ToString();
+            txtTacGia.Text = row.Cells["TacGia"].Value?.ToString();
+            txtNhaXuatBan.Text = row.Cells["Nha_Xuat_Ban"].Value?.ToString();
+            txtGiaNhap.Text = row.Cells["GiaNhap"].Value?.ToString();
+            txtGiaBan.Text = row.Cells["GiaBan"].Value?.ToString();
+            txtSoLuong.Text = row.Cells["SoLuong"].Value?.ToString();
 
             cboTheLoai.SelectedValue = row.Cells["ID_TheLoai"].Value;
-            cboNhaCungCap.SelectedValue = row.Cells["Ma_Nha_Cung_Cap"].Value;
+
 
             txtMaSach.ReadOnly = true;
             txtSoLuong.ReadOnly = true;
@@ -162,7 +159,7 @@ namespace QuanLy_NhaSach
                         cmd.Parameters.AddWithValue("@GiaBan", Convert.ToDecimal(txtGiaBan.Text));
                         cmd.Parameters.AddWithValue("@SoLuong", Convert.ToInt32(txtSoLuong.Text));
                         cmd.Parameters.AddWithValue("@ID_TheLoai", cboTheLoai.SelectedValue);
-                        cmd.Parameters.AddWithValue("@Ma_Nha_Cung_Cap", cboNhaCungCap.SelectedValue);
+
 
                         conn.Open();
                         cmd.ExecuteNonQuery();
@@ -176,6 +173,10 @@ namespace QuanLy_NhaSach
             catch (SqlException ex)
             {
                 MessageBox.Show(ex.Message, "Lỗi CSDL", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (FormatException)
+            {
+                MessageBox.Show("Vui lòng kiểm tra lại định dạng số (Giá, Số lượng).", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -195,7 +196,7 @@ namespace QuanLy_NhaSach
                         cmd.Parameters.AddWithValue("@GiaNhap", Convert.ToDecimal(txtGiaNhap.Text));
                         cmd.Parameters.AddWithValue("@GiaBan", Convert.ToDecimal(txtGiaBan.Text));
                         cmd.Parameters.AddWithValue("@ID_TheLoai", cboTheLoai.SelectedValue);
-                        cmd.Parameters.AddWithValue("@Ma_Nha_Cung_Cap", cboNhaCungCap.SelectedValue);
+
 
                         conn.Open();
                         cmd.ExecuteNonQuery();
@@ -241,7 +242,7 @@ namespace QuanLy_NhaSach
             {
                 if (ex.Number == 547)
                 {
-                    MessageBox.Show("Không thể xóa sách này vì đã có trong hóa đơn.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Không thể xóa sách này vì đã có trong hóa đơn hoặc phiếu nhập.", "Lỗi ràng buộc", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                 else
                 {
