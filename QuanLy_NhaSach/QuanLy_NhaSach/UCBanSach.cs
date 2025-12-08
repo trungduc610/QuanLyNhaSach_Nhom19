@@ -1,424 +1,214 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
+using System.Data.SqlClient; // Để dùng Transaction
 using System.Windows.Forms;
 
 namespace QuanLy_NhaSach
 {
     public partial class UCBanSach : UserControl
     {
-        string strKetNoi = @"Data Source=DESKTOP-DF0P4U3\SQLEXPRESS;Initial Catalog=NhaSach;User ID=sa;Password=123;Encrypt=True;TrustServerCertificate=True";
+        private string _maNV;
+        private string _tenNV;
+        private DataTable _dtSach;
+        private DataTable _dtGioHang;
 
-        string _maNhanVien = "";
-        string _tenNhanVien = "";
-        string _maTaiKhoan = "";
-        private decimal _tongTienCanThanhToan = 0;
-
-        DataTable dtSach;
-        BindingSource bsSach = new BindingSource();
-
-        public UCBanSach()
+        public UCBanSach(string maNV, string tenNV)
         {
             InitializeComponent();
-        }
-
-        public UCBanSach(string maTaiKhoan, string tenNhanVien)
-        {
-            InitializeComponent();
-            _maTaiKhoan = maTaiKhoan;
-            _tenNhanVien = tenNhanVien;
+            _maNV = maNV;
+            _tenNV = tenNV;
+            this.Load += new EventHandler(UCBanSach_Load);
+            this.VisibleChanged += new EventHandler(UCBanSach_VisibleChanged);
+            KhoiTaoGioHang();
         }
 
         private void UCBanSach_Load(object sender, EventArgs e)
         {
-            txtNhanVien.Text = _tenNhanVien;
-            LayMaNhanVienTuTaiKhoan();
-            SinhMaHoaDon();
             LoadKhachHang();
             LoadSach();
-            cboSach.MaxDropDownItems = 8;
-            cboSach.IntegralHeight = false;
-            cboSach.DropDownHeight = 150;
-        }
-
-        private void LayMaNhanVienTuTaiKhoan()
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(strKetNoi))
-                {
-                    conn.Open();
-                    string query = "SELECT Ma_Nhan_Vien FROM TAIKHOAN WHERE TenDangNhap = @TenDN";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@TenDN", _maTaiKhoan);
-                    object result = cmd.ExecuteScalar();
-                    if (result != null)
-                    {
-                        _maNhanVien = result.ToString();
-                    }
-                    else
-                    {
-                        _maNhanVien = "NV001";
-                    }
-                }
-            }
-            catch { _maNhanVien = "NV001"; }
-        }
-
-        private void SinhMaHoaDon()
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(strKetNoi))
-                {
-                    conn.Open();
-                    string query = "SELECT TOP 1 Ma_Hoa_Don FROM HOADON ORDER BY Ma_Hoa_Don DESC";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    object result = cmd.ExecuteScalar();
-
-                    if (result != null && result != DBNull.Value)
-                    {
-                        string maCuoi = result.ToString().Trim();
-
-                        string phanSo = maCuoi.Substring(2);
-                        int soThuTu = 0;
-
-                        if (int.TryParse(phanSo, out soThuTu))
-                        {
-                            int maMoi = soThuTu + 1;
-                            txtMaHoaDon.Text = "HD" + maMoi.ToString("D3");
-                        }
-                        else
-                        {
-                            txtMaHoaDon.Text = "HD001";
-                        }
-                    }
-                    else
-                    {
-                        txtMaHoaDon.Text = "HD001";
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                txtMaHoaDon.Text = "HD999";
-                MessageBox.Show("Lỗi sinh mã: " + ex.Message);
-            }
         }
 
         private void LoadKhachHang()
         {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(strKetNoi))
-                {
-                    conn.Open();
-                    string query = "SELECT Ma_Khach_Hang, Ten_Khach_Hang FROM KHACHHANG";
-                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    DataTable dt = new DataTable();
-                    da.Fill(dt);
-
-                    cboKhachHang.DataSource = dt;
-                    cboKhachHang.DisplayMember = "Ten_Khach_Hang";
-                    cboKhachHang.ValueMember = "Ma_Khach_Hang";
-                }
-            }
-            catch (Exception ex) { MessageBox.Show("Lỗi load KH: " + ex.Message); }
+            string query = "SELECT Ma_Khach_Hang, Ten_Khach_Hang FROM KHACHHANG WHERE TrangThai = 1";
+            // Gọi Helper lấy bảng, không cần viết SqlConnection nữa
+            cboKhachHang.DataSource = DatabaseHelper.GetDataTable(query);
+            cboKhachHang.DisplayMember = "Ten_Khach_Hang";
+            cboKhachHang.ValueMember = "Ma_Khach_Hang";
         }
 
         private void LoadSach()
         {
-            try
+            // Gọi Helper lấy bảng Sách
+            _dtSach = DatabaseHelper.GetDataTable("SP_LayDanhSachSach");
+
+            if (!_dtSach.Columns.Contains("TenSach_KhongDau"))
+                _dtSach.Columns.Add("TenSach_KhongDau", typeof(string));
+
+            foreach (DataRow row in _dtSach.Rows)
             {
-                using (SqlConnection conn = new SqlConnection(strKetNoi))
-                {
-                    conn.Open();
-                    string query = "SELECT MaSach, TenSach, GiaBan, SoLuong, GiaNhap FROM SACH";
-                    SqlDataAdapter da = new SqlDataAdapter(query, conn);
-                    dtSach = new DataTable();
-                    da.Fill(dtSach);
-
-                    dtSach.Columns.Add("TenSach_KhongDau", typeof(string));
-
-                    foreach (DataRow row in dtSach.Rows)
-                    {
-                        string tenSach = row["TenSach"] != DBNull.Value ? row["TenSach"].ToString() : "";
-                        string maSach = row["MaSach"] != DBNull.Value ? row["MaSach"].ToString() : "";
-
-                        string gopChuoi = tenSach + " " + maSach;
-
-                        row["TenSach_KhongDau"] = XoaDau(gopChuoi);
-                    }
-
-                    bsSach.DataSource = dtSach;
-
-                    cboSach.DataSource = bsSach;
-                    cboSach.DisplayMember = "TenSach";
-                    cboSach.ValueMember = "MaSach";
-                }
+                // Gọi Helper hàm XoaDau
+                row["TenSach_KhongDau"] = DatabaseHelper.XoaDau(row["TenSach"].ToString()).ToLower();
             }
-            catch (Exception ex)
+
+            cboSach.DataSource = _dtSach;
+            cboSach.DisplayMember = "TenSach";
+            cboSach.ValueMember = "MaSach";
+            cboSach.DropDownStyle = ComboBoxStyle.DropDown;
+            cboSach.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            cboSach.AutoCompleteSource = AutoCompleteSource.ListItems;
+        }
+
+        private void KhoiTaoGioHang()
+        {
+            _dtGioHang = new DataTable();
+            _dtGioHang.Columns.Add("MaSach");
+            _dtGioHang.Columns.Add("TenSach");
+            _dtGioHang.Columns.Add("DonGia", typeof(decimal));
+            _dtGioHang.Columns.Add("SoLuong", typeof(int));
+            _dtGioHang.Columns.Add("ThanhTien", typeof(decimal));
+            dgvGioHang.DataSource = _dtGioHang;
+
+            if (dgvGioHang.Columns["colXoa"] == null)
             {
-                MessageBox.Show("Lỗi load Sách: " + ex.Message);
+                DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
+                btnXoa.Name = "colXoa";
+                btnXoa.HeaderText = "Xóa";
+                btnXoa.Text = "X";
+                btnXoa.UseColumnTextForButtonValue = true;
+                dgvGioHang.Columns.Add(btnXoa);
             }
         }
 
         private void cboSach_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (cboSach.SelectedValue != null && cboSach.SelectedItem is DataRowView row)
+            if (cboSach.SelectedIndex == -1) return;
+            if (cboSach.SelectedItem is DataRowView row)
             {
-                txtGiaBan.Text = decimal.Parse(row["GiaBan"].ToString()).ToString("N0");
-                txtTonKho.Text = row["SoLuong"].ToString();
+                lblGiaBan.Text = Convert.ToDecimal(row["GiaBan"]).ToString("N0") + " VNĐ";
+                lblTonKho.Text = $"(Tồn kho: {row["SoLuong"]})";
             }
         }
 
-        private void txtTimKiemSach_TextChanged(object sender, EventArgs e)
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
-            if (bsSach.DataSource == null) return;
-
-            string tuKhoa = txtTimKiemSach.Text.Trim();
-            string tuKhoaKhongDau = XoaDau(tuKhoa);
-
+            if (_dtSach == null) return;
+            string tuKhoa = DatabaseHelper.XoaDau(txtTimKiem.Text.Trim()).ToLower();
             try
             {
-                if (!string.IsNullOrEmpty(tuKhoaKhongDau))
-                {
-                    string[] cacTu = tuKhoaKhongDau.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                    System.Collections.Generic.List<string> cacDieuKien = new System.Collections.Generic.List<string>();
-
-                    foreach (string tu in cacTu)
-                    {
-                        cacDieuKien.Add($"TenSach_KhongDau LIKE '%{tu}%'");
-                    }
-
-                    bsSach.Filter = string.Join(" AND ", cacDieuKien);
-                }
-                else
-                {
-                    bsSach.RemoveFilter();
-                }
-
-                if (cboSach.Items.Count > 0 && !string.IsNullOrEmpty(tuKhoa))
-                {
-                    cboSach.DroppedDown = true;
-                    Cursor.Current = Cursors.Default;
-                }
-                else
-                {
-                    cboSach.DroppedDown = false;
-                }
+                _dtSach.DefaultView.RowFilter = string.Format(
+                    "MaSach LIKE '%{0}%' OR TenSach LIKE '%{0}%' OR TenSach_KhongDau LIKE '%{1}%'",
+                    txtTimKiem.Text.Trim(), tuKhoa);
             }
-            catch (Exception ex)
-            {
-            }
+            catch { _dtSach.DefaultView.RowFilter = ""; }
         }
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (cboSach.SelectedValue == null) return;
-
-            string maSach = cboSach.SelectedValue.ToString();
-            string tenSach = cboSach.Text;
-            decimal giaBan = decimal.Parse(txtGiaBan.Text);
-            int tonKho = int.Parse(txtTonKho.Text);
+            if (cboSach.SelectedIndex == -1) return;
+            DataRowView sach = (DataRowView)cboSach.SelectedItem;
+            string maSach = sach["MaSach"].ToString();
             int soLuongMua = (int)numSoLuong.Value;
+            int tonKho = Convert.ToInt32(sach["SoLuong"]);
 
-            if (soLuongMua > tonKho)
-            {
-                MessageBox.Show($"Sách này chỉ còn {tonKho} cuốn. Không đủ để bán!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            if (soLuongMua > tonKho) { MessageBox.Show("Không đủ hàng!", "Cảnh báo"); return; }
 
-            foreach (DataGridViewRow row in dgvChiTietBan.Rows)
+            foreach (DataRow r in _dtGioHang.Rows)
             {
-                if (row.Cells["colMaSach"].Value.ToString() == maSach)
+                if (r["MaSach"].ToString() == maSach)
                 {
-                    int slHienTaiTrongGio = int.Parse(row.Cells["colSoLuong"].Value.ToString());
-                    int slMoi = slHienTaiTrongGio + soLuongMua;
-
-                    if (slMoi > tonKho)
-                    {
-                        MessageBox.Show($"Tổng số lượng mua ({slMoi}) vượt quá tồn kho ({tonKho})!", "Cảnh báo");
-                        return;
-                    }
-
-                    row.Cells["colSoLuong"].Value = slMoi;
-                    row.Cells["colThanhTien"].Value = slMoi * giaBan;
-                    TinhTongTien();
-                    return;
+                    r["SoLuong"] = (int)r["SoLuong"] + soLuongMua;
+                    r["ThanhTien"] = (int)r["SoLuong"] * Convert.ToDecimal(r["DonGia"]);
+                    TinhTongTien(); return;
                 }
             }
-
-            decimal thanhTien = giaBan * soLuongMua;
-            dgvChiTietBan.Rows.Add(maSach, tenSach, giaBan, soLuongMua, thanhTien);
+            _dtGioHang.Rows.Add(maSach, sach["TenSach"], sach["GiaBan"], soLuongMua, (decimal)sach["GiaBan"] * soLuongMua);
             TinhTongTien();
         }
 
-        private void TinhTongTien()
+        private void dgvGioHang_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            _tongTienCanThanhToan = 0;
-            foreach (DataGridViewRow row in dgvChiTietBan.Rows)
+            if (e.RowIndex >= 0 && dgvGioHang.Columns[e.ColumnIndex].Name == "colXoa")
             {
-                _tongTienCanThanhToan += decimal.Parse(row.Cells["colThanhTien"].Value.ToString());
-            }
-
-            lblTongTien.Text = _tongTienCanThanhToan.ToString("N0") + " VNĐ";
-            TinhTienThua();
-        }
-
-        private void txtTienKhachDua_TextChanged(object sender, EventArgs e)
-        {
-            TinhTienThua();
-        }
-
-        private void TinhTienThua()
-        {
-            try
-            {
-                string rawText = txtTienKhachDua.Text.Replace(",", "").Replace(".", "");
-                decimal tienKhachDua = 0;
-                if (!string.IsNullOrEmpty(rawText))
-                {
-                    if (!decimal.TryParse(rawText, out tienKhachDua))
-                    {
-                        lblTienThua.Text = "Lỗi nhập";
-                        return;
-                    }
-                }
-
-                decimal tienThua = tienKhachDua - _tongTienCanThanhToan;
-
-                lblTienThua.Text = tienThua.ToString("N0") + " VNĐ";
-
-                if (tienThua < 0)
-                {
-                    lblTienThua.ForeColor = Color.Red;
-                }
-                else
-                {
-                    lblTienThua.ForeColor = Color.Green;
-                }
-            }
-            catch
-            {
-                lblTienThua.Text = "0 VNĐ";
-            }
-        }
-
-        private void dgvChiTietBan_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex >= 0 && e.ColumnIndex == dgvChiTietBan.Columns["colXoa"].Index)
-            {
-                dgvChiTietBan.Rows.RemoveAt(e.RowIndex);
+                dgvGioHang.Rows.RemoveAt(e.RowIndex);
                 TinhTongTien();
             }
         }
 
+        private void TinhTongTien()
+        {
+            decimal tong = 0;
+            foreach (DataRow r in _dtGioHang.Rows) tong += Convert.ToDecimal(r["ThanhTien"]);
+            lblTongTien.Text = tong.ToString("N0") + " VNĐ";
+        }
+
         private void btnThanhToan_Click(object sender, EventArgs e)
         {
-            if (dgvChiTietBan.Rows.Count == 0)
-            {
-                MessageBox.Show("Giỏ hàng trống!");
-                return;
-            }
+            if (_dtGioHang.Rows.Count == 0) { MessageBox.Show("Giỏ hàng trống!"); return; }
 
-            if (cboKhachHang.SelectedValue == null)
-            {
-                MessageBox.Show("Vui lòng chọn Khách hàng!");
-                return;
-            }
-
-            string rawText = txtTienKhachDua.Text.Replace(",", "").Replace(".", "");
-            decimal tienKhachDua = 0;
-            decimal.TryParse(rawText, out tienKhachDua);
-
-            if (tienKhachDua < _tongTienCanThanhToan)
-            {
-                decimal thieu = _tongTienCanThanhToan - tienKhachDua;
-                MessageBox.Show($"Khách đưa thiếu tiền!\nCòn thiếu: {thieu.ToString("N0")} VNĐ",
-                                "Chưa đủ tiền", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtTienKhachDua.Focus();
-                return;
-            }
-
-            using (SqlConnection conn = new SqlConnection(strKetNoi))
+            string maHD = "";
+            using (SqlConnection conn = new SqlConnection(DatabaseHelper.ConnectionString))
             {
                 conn.Open();
-                SqlTransaction transaction = conn.BeginTransaction();
-
+                SqlTransaction trans = conn.BeginTransaction();
                 try
                 {
-                    string queryHD = @"INSERT INTO HOADON (Ma_Hoa_Don, Ma_Nhan_Vien, Ma_Khach_Hang, NgayLap, TongTien)
-                                       VALUES (@MaHD, @MaNV, @MaKH, @NgayLap, 0)";
+                    maHD = "HD" + DateTime.Now.ToString("ddHHmmss");
+                    string queryHD = "INSERT INTO HOADON (Ma_Hoa_Don, Ma_Nhan_Vien, Ma_Khach_Hang, NgayLap, TrangThai) VALUES (@MaHD, @MaNV, @MaKH, GETDATE(), 1)";
 
-                    SqlCommand cmdHD = new SqlCommand(queryHD, conn, transaction);
-                    cmdHD.Parameters.AddWithValue("@MaHD", txtMaHoaDon.Text);
-                    cmdHD.Parameters.AddWithValue("@MaNV", _maNhanVien);
-                    cmdHD.Parameters.AddWithValue("@MaKH", cboKhachHang.SelectedValue.ToString());
-                    cmdHD.Parameters.AddWithValue("@NgayLap", dtpNgayLap.Value);
-                    cmdHD.ExecuteNonQuery();
-
-                    string queryCT = @"INSERT INTO CHITIETHOADON (Ma_Hoa_Don, MaSach, SoLuong)
-                                       VALUES (@MaHD, @MaSach, @SoLuong)";
-
-                    foreach (DataGridViewRow row in dgvChiTietBan.Rows)
+                    using (SqlCommand cmdHD = new SqlCommand(queryHD, conn, trans))
                     {
-                        SqlCommand cmdCT = new SqlCommand(queryCT, conn, transaction);
-                        cmdCT.Parameters.AddWithValue("@MaHD", txtMaHoaDon.Text);
-                        cmdCT.Parameters.AddWithValue("@MaSach", row.Cells["colMaSach"].Value.ToString());
-                        cmdCT.Parameters.AddWithValue("@SoLuong", int.Parse(row.Cells["colSoLuong"].Value.ToString()));
-                        cmdCT.ExecuteNonQuery();
+                        cmdHD.Parameters.AddWithValue("@MaHD", maHD);
+                        cmdHD.Parameters.AddWithValue("@MaNV", _maNV);
+                        if (cboKhachHang.SelectedValue != null) cmdHD.Parameters.AddWithValue("@MaKH", cboKhachHang.SelectedValue);
+                        else cmdHD.Parameters.AddWithValue("@MaKH", DBNull.Value);
+                        cmdHD.ExecuteNonQuery();
                     }
 
-                    transaction.Commit();
-                    MessageBox.Show("Thanh toán thành công! Hóa đơn đã được lưu.");
+                    string queryCT = "INSERT INTO CHITIETHOADON (Ma_Hoa_Don, MaSach, SoLuong, DonGia) VALUES (@MaHD, @MaSach, @SoLuong, @DonGia)";
+                    foreach (DataRow r in _dtGioHang.Rows)
+                    {
+                        using (SqlCommand cmdCT = new SqlCommand(queryCT, conn, trans))
+                        {
+                            cmdCT.Parameters.AddWithValue("@MaHD", maHD);
+                            cmdCT.Parameters.AddWithValue("@MaSach", r["MaSach"]);
+                            cmdCT.Parameters.AddWithValue("@SoLuong", r["SoLuong"]);
+                            cmdCT.Parameters.AddWithValue("@DonGia", r["DonGia"]);
+                            cmdCT.ExecuteNonQuery();
+                        }
+                    }
 
-                    dgvChiTietBan.Rows.Clear();
-                    lblTongTien.Text = "0 VNĐ";
-                    txtTienKhachDua.Text = "";
-                    lblTienThua.Text = "0 VNĐ";
-                    _tongTienCanThanhToan = 0;
-                    SinhMaHoaDon();
-                    LoadSach();
-                }
-                catch (SqlException sqlEx)
-                {
-                    transaction.Rollback();
-                    if (sqlEx.Message.Contains("Không đủ số lượng sách"))
-                    {
-                        MessageBox.Show("LỖI KHO: " + sqlEx.Message, "Hết hàng", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Lỗi hệ thống: " + sqlEx.Message);
-                    }
+                    trans.Commit();
+                    NotificationHelper.FireTransactionCompleted();
+                    MessageBox.Show("Thanh toán thành công! Mã: " + maHD, "Thông báo");
                 }
                 catch (Exception ex)
                 {
-                    transaction.Rollback();
-                    MessageBox.Show("Lỗi không xác định: " + ex.Message);
+                    trans.Rollback();
+                    MessageBox.Show("Lỗi: " + ex.Message);
+                    return;
                 }
             }
-        }
-        private string XoaDau(string s)
-        {
-            if (string.IsNullOrEmpty(s)) return string.Empty;
 
-            s = s.ToLower().Trim(); // Đưa về chữ thường và xóa khoảng trắng thừa
+            //if (MessageBox.Show("Bạn có muốn in hóa đơn không?", "Thành công", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
+            //{
+            //    frm_InHoaDon frmIn = new frm_InHoaDon(maHD);
+            //    frmIn.ShowDialog();
+            //}
 
-            // Thay thế các ký tự đặc biệt của tiếng Việt
-            s = s.Replace("đ", "d").Replace("Đ", "d");
-
-            // Dùng Regex để loại bỏ dấu
-            System.Text.RegularExpressions.Regex regex = new System.Text.RegularExpressions.Regex("\\p{IsCombiningDiacriticalMarks}+");
-            string temp = s.Normalize(System.Text.NormalizationForm.FormD);
-            return regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'd');
+            _dtGioHang.Rows.Clear();
+            lblTongTien.Text = "0 VNĐ";
+            LoadSach();
         }
 
-        private void grpThongTinHD_Enter(object sender, EventArgs e)
+        private void UCBanSach_VisibleChanged(object sender, EventArgs e)
         {
-
+            // Nếu Form đang hiện lên (Visible = true) thì tải lại sách
+            if (this.Visible == true)
+            {
+                LoadSach();
+                // LoadKhachHang(); // Nếu muốn cập nhật cả khách hàng mới thêm
+            }
         }
     }
 }

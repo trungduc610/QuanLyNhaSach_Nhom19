@@ -2,204 +2,163 @@
 {
     partial class frm_Themtaikhoan
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && (components != null)) components.Dispose();
             base.Dispose(disposing);
         }
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
-            this.btnHuy = new System.Windows.Forms.Button();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtTenDN = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.lbTenSach = new System.Windows.Forms.Label();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.txt_Xacnhanmk = new System.Windows.Forms.TextBox();
-            this.txt_Matkhau = new System.Windows.Forms.TextBox();
-            this.panel7 = new System.Windows.Forms.Panel();
-            this.txbTenDN = new System.Windows.Forms.TextBox();
+            this.txtMatKhau = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnLuu = new System.Windows.Forms.Button();
-            this.lblTenNhanVien = new System.Windows.Forms.Label();
+            this.btnHuy = new System.Windows.Forms.Button();
+            this.lblTenNV = new System.Windows.Forms.Label();
+            this.cboQuyen = new System.Windows.Forms.ComboBox();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // btnHuy
+            // label1
             // 
-            this.btnHuy.BackColor = System.Drawing.Color.Red;
-            this.btnHuy.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHuy.Location = new System.Drawing.Point(218, 371);
-            this.btnHuy.Name = "btnHuy";
-            this.btnHuy.Size = new System.Drawing.Size(254, 60);
-            this.btnHuy.TabIndex = 53;
-            this.btnHuy.Text = "Hủy";
-            this.btnHuy.UseVisualStyleBackColor = false;
-            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
+            this.label1.Location = new System.Drawing.Point(80, 20);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(199, 32);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "CẤP TÀI KHOẢN";
             // 
-            // label3
+            // txtTenDN
             // 
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.label3.Location = new System.Drawing.Point(103, 291);
-            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(297, 42);
-            this.label3.TabIndex = 51;
-            this.label3.Text = "Xác nhận mật khẩu:";
-            this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtTenDN.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtTenDN.Location = new System.Drawing.Point(30, 110);
+            this.txtTenDN.Name = "txtTenDN";
+            this.txtTenDN.Size = new System.Drawing.Size(300, 32);
+            this.txtTenDN.TabIndex = 1;
             // 
             // label2
             // 
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.label2.Location = new System.Drawing.Point(103, 215);
-            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label2.Location = new System.Drawing.Point(30, 85);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(162, 42);
-            this.label2.TabIndex = 50;
-            this.label2.Text = "Mật khẩu:";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.label2.Size = new System.Drawing.Size(128, 23);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Tên đăng nhập:";
             // 
-            // lbTenSach
+            // txtMatKhau
             // 
-            this.lbTenSach.Font = new System.Drawing.Font("Segoe UI", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbTenSach.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lbTenSach.Location = new System.Drawing.Point(103, 137);
-            this.lbTenSach.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbTenSach.Name = "lbTenSach";
-            this.lbTenSach.Size = new System.Drawing.Size(236, 42);
-            this.lbTenSach.TabIndex = 49;
-            this.lbTenSach.Text = "Tên đăng nhập:";
-            this.lbTenSach.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.txtMatKhau.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.txtMatKhau.Location = new System.Drawing.Point(30, 180);
+            this.txtMatKhau.Name = "txtMatKhau";
+            this.txtMatKhau.Size = new System.Drawing.Size(300, 32);
+            this.txtMatKhau.TabIndex = 3;
+            this.txtMatKhau.UseSystemPasswordChar = true;
             // 
-            // panel2
+            // label3
             // 
-            this.panel2.BackColor = System.Drawing.Color.Black;
-            this.panel2.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel2.Location = new System.Drawing.Point(439, 332);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(377, 1);
-            this.panel2.TabIndex = 47;
-            // 
-            // panel1
-            // 
-            this.panel1.BackColor = System.Drawing.Color.Black;
-            this.panel1.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel1.Location = new System.Drawing.Point(439, 256);
-            this.panel1.Margin = new System.Windows.Forms.Padding(2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(377, 1);
-            this.panel1.TabIndex = 46;
-            // 
-            // txt_Xacnhanmk
-            // 
-            this.txt_Xacnhanmk.BackColor = System.Drawing.Color.White;
-            this.txt_Xacnhanmk.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_Xacnhanmk.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Xacnhanmk.Location = new System.Drawing.Point(439, 294);
-            this.txt_Xacnhanmk.Margin = new System.Windows.Forms.Padding(2);
-            this.txt_Xacnhanmk.Name = "txt_Xacnhanmk";
-            this.txt_Xacnhanmk.PasswordChar = '*';
-            this.txt_Xacnhanmk.Size = new System.Drawing.Size(377, 40);
-            this.txt_Xacnhanmk.TabIndex = 44;
-            // 
-            // txt_Matkhau
-            // 
-            this.txt_Matkhau.BackColor = System.Drawing.Color.White;
-            this.txt_Matkhau.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_Matkhau.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Matkhau.Location = new System.Drawing.Point(439, 217);
-            this.txt_Matkhau.Margin = new System.Windows.Forms.Padding(2);
-            this.txt_Matkhau.Name = "txt_Matkhau";
-            this.txt_Matkhau.PasswordChar = '*';
-            this.txt_Matkhau.Size = new System.Drawing.Size(377, 40);
-            this.txt_Matkhau.TabIndex = 43;
-            // 
-            // panel7
-            // 
-            this.panel7.BackColor = System.Drawing.Color.Black;
-            this.panel7.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.panel7.Location = new System.Drawing.Point(439, 176);
-            this.panel7.Margin = new System.Windows.Forms.Padding(2);
-            this.panel7.Name = "panel7";
-            this.panel7.Size = new System.Drawing.Size(377, 1);
-            this.panel7.TabIndex = 42;
-            // 
-            // txbTenDN
-            // 
-            this.txbTenDN.BackColor = System.Drawing.Color.White;
-            this.txbTenDN.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txbTenDN.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txbTenDN.Location = new System.Drawing.Point(439, 137);
-            this.txbTenDN.Margin = new System.Windows.Forms.Padding(2);
-            this.txbTenDN.Name = "txbTenDN";
-            this.txbTenDN.Size = new System.Drawing.Size(377, 40);
-            this.txbTenDN.TabIndex = 41;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label3.Location = new System.Drawing.Point(30, 155);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(86, 23);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Mật khẩu:";
             // 
             // btnLuu
             // 
-            this.btnLuu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnLuu.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLuu.Location = new System.Drawing.Point(528, 371);
+            this.btnLuu.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
+            this.btnLuu.FlatAppearance.BorderSize = 0;
+            this.btnLuu.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLuu.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.btnLuu.ForeColor = System.Drawing.Color.White;
+            this.btnLuu.Location = new System.Drawing.Point(180, 310);
             this.btnLuu.Name = "btnLuu";
-            this.btnLuu.Size = new System.Drawing.Size(254, 60);
-            this.btnLuu.TabIndex = 54;
+            this.btnLuu.Size = new System.Drawing.Size(150, 45);
+            this.btnLuu.TabIndex = 5;
             this.btnLuu.Text = "Lưu";
             this.btnLuu.UseVisualStyleBackColor = false;
             this.btnLuu.Click += new System.EventHandler(this.btnLuu_Click);
             // 
-            // lblTenNhanVien
+            // btnHuy
             // 
-            this.lblTenNhanVien.Font = new System.Drawing.Font("Segoe UI", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTenNhanVien.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(73)))), ((int)(((byte)(94)))));
-            this.lblTenNhanVien.Location = new System.Drawing.Point(169, 62);
-            this.lblTenNhanVien.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTenNhanVien.Name = "lblTenNhanVien";
-            this.lblTenNhanVien.Size = new System.Drawing.Size(557, 42);
-            this.lblTenNhanVien.TabIndex = 55;
-            this.lblTenNhanVien.Text = "Cấp tài khoản ";
-            this.lblTenNhanVien.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnHuy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(57)))), ((int)(((byte)(43)))));
+            this.btnHuy.FlatAppearance.BorderSize = 0;
+            this.btnHuy.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHuy.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
+            this.btnHuy.ForeColor = System.Drawing.Color.White;
+            this.btnHuy.Location = new System.Drawing.Point(30, 310);
+            this.btnHuy.Name = "btnHuy";
+            this.btnHuy.Size = new System.Drawing.Size(130, 45);
+            this.btnHuy.TabIndex = 6;
+            this.btnHuy.Text = "Hủy";
+            this.btnHuy.UseVisualStyleBackColor = false;
+            this.btnHuy.Click += new System.EventHandler(this.btnHuy_Click);
+            // 
+            // lblTenNV
+            // 
+            this.lblTenNV.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Italic);
+            this.lblTenNV.ForeColor = System.Drawing.Color.Gray;
+            this.lblTenNV.Location = new System.Drawing.Point(30, 55);
+            this.lblTenNV.Name = "lblTenNV";
+            this.lblTenNV.Size = new System.Drawing.Size(300, 23);
+            this.lblTenNV.TabIndex = 7;
+            this.lblTenNV.Text = "Cho nhân viên: [Tên]";
+            this.lblTenNV.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // cboQuyen
+            // 
+            this.cboQuyen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboQuyen.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.cboQuyen.FormattingEnabled = true;
+            this.cboQuyen.Items.AddRange(new object[] {
+            "NhanVien",
+            "Admin"});
+            this.cboQuyen.Location = new System.Drawing.Point(30, 250);
+            this.cboQuyen.Name = "cboQuyen";
+            this.cboQuyen.Size = new System.Drawing.Size(300, 33);
+            this.cboQuyen.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.label4.Location = new System.Drawing.Point(30, 225);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(64, 23);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Quyền:";
             // 
             // frm_Themtaikhoan
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(934, 539);
-            this.Controls.Add(this.lblTenNhanVien);
-            this.Controls.Add(this.btnLuu);
+            this.ClientSize = new System.Drawing.Size(360, 380);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.cboQuyen);
+            this.Controls.Add(this.lblTenNV);
             this.Controls.Add(this.btnHuy);
+            this.Controls.Add(this.btnLuu);
             this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtMatKhau);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.lbTenSach);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.txt_Xacnhanmk);
-            this.Controls.Add(this.txt_Matkhau);
-            this.Controls.Add(this.panel7);
-            this.Controls.Add(this.txbTenDN);
+            this.Controls.Add(this.txtTenDN);
+            this.Controls.Add(this.label1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "frm_Themtaikhoan";
-            this.Text = "Thêm Tài khoản ";
-            this.Load += new System.EventHandler(this.frm_Themtaikhoan_Load);
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Cấp tài khoản";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -207,17 +166,15 @@
 
         #endregion
 
-        private System.Windows.Forms.Button btnHuy;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtTenDN;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label lbTenSach;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txt_Xacnhanmk;
-        private System.Windows.Forms.TextBox txt_Matkhau;
-        private System.Windows.Forms.Panel panel7;
-        private System.Windows.Forms.TextBox txbTenDN;
+        private System.Windows.Forms.TextBox txtMatKhau;
+        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnLuu;
-        private System.Windows.Forms.Label lblTenNhanVien;
+        private System.Windows.Forms.Button btnHuy;
+        private System.Windows.Forms.Label lblTenNV;
+        private System.Windows.Forms.ComboBox cboQuyen;
+        private System.Windows.Forms.Label label4;
     }
 }

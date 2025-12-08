@@ -1,289 +1,270 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace QuanLy_NhaSach
 {
     public partial class UCQLNhanVien : UserControl
     {
-        string connectionString = @"Data Source=DESKTOP-DF0P4U3\SQLEXPRESS;Initial Catalog=NhaSach;User ID=sa;Password=123;Encrypt=True;TrustServerCertificate=True";
         private string _maNhanVienDangNhap;
+
+        private const string ADMIN_BOSS = "NV001";
+
         public UCQLNhanVien(string maNhanVienDangNhap)
         {
             InitializeComponent();
             _maNhanVienDangNhap = maNhanVienDangNhap;
+            this.Load += new EventHandler(UCQLNhanVien_Load);
+
+            // Gán sự kiện cho nút Cấp/Xóa tài khoản
+            this.btnThemTaiKhoan.Click += new EventHandler(btnThemTaiKhoan_Click);
         }
 
         private void UCQLNhanVien_Load(object sender, EventArgs e)
         {
-            dtpNgaySinh.Format = DateTimePickerFormat.Custom;
-            dtpNgaySinh.CustomFormat = "dd/MM/yyyy";
-
-            LoadDanhSachNhanVien();
-
-            comboBox1.Items.Add("Nam");
-            comboBox1.Items.Add("Nữ");
-
-            dgvNhanVien.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            LamMoiForm();
+            LoadData();
+            ResetForm();
         }
 
-        private void LoadDanhSachNhanVien()
+        private void LoadData()
+        {
+            // Gọi SP_LayDanhSachNhanVien (đã có thêm cột Quyen)
+            DataTable dt = DatabaseHelper.GetDataTable("SP_LayDanhSachNhanVien");
+            dgvNhanVien.DataSource = dt;
+
+            // Ẩn cột không cần thiết
+            if (dgvNhanVien.Columns.Contains("TrangThai"))
+                dgvNhanVien.Columns["TrangThai"].Visible = false;
+
+            if (dgvNhanVien.Columns.Contains("Quyen"))
+            {
+                dgvNhanVien.Columns["Quyen"].HeaderText = "Quyền Truy Cập";
+                dgvNhanVien.Columns["Quyen"].Width = 60;
+                dgvNhanVien.Columns["Quyen"].DisplayIndex = 7;
+            }
+
+            // Cấu hình cột Tình trạng TK
+            if (dgvNhanVien.Columns.Contains("TinhTrangTaiKhoan"))
+            {
+                dgvNhanVien.Columns["TinhTrangTaiKhoan"].HeaderText = "Tình Trạng TK";
+                dgvNhanVien.Columns["TinhTrangTaiKhoan"].Width = 60;
+            }
+        }
+
+        // --- XỬ LÝ CLICK: KIỂM TRA QUYỀN VÀ TRẠNG THÁI ---
+        private void dgvNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            DataGridViewRow row = dgvNhanVien.Rows[e.RowIndex];
+            string maNV_DangChon = row.Cells["Ma_Nhan_Vien"].Value.ToString();
+            string tinhTrangTK = row.Cells["TinhTrangTaiKhoan"].Value.ToString();
+
+            // 1. Đổ dữ liệu vào ô nhập
+            txtMaNV.Text = maNV_DangChon;
+            txtTenNV.Text = row.Cells["Ten_Nhan_Vien"].Value.ToString();
+            if (row.Cells["NgaySinh"].Value != DBNull.Value)
+                dtpNgaySinh.Value = Convert.ToDateTime(row.Cells["NgaySinh"].Value);
+            cboGioiTinh.Text = row.Cells["GioiTinh"].Value.ToString();
+            txtSDT.Text = row.Cells["So_Dien_Thoai"].Value.ToString();
+            txtDiaChi.Text = row.Cells["DiaChi"].Value.ToString();
+
+            // Khóa mã
+            txtMaNV.ReadOnly = true;
+            btnThem.Enabled = false;
+            btnSua.Enabled = true;
+
+            // --- LOGIC BẢO MẬT NÚT XÓA NHÂN VIÊN ---
+            // 1. Không được xóa Sếp (NV001)
+            // 2. Không được xóa Chính mình
+            if (maNV_DangChon == ADMIN_BOSS || maNV_DangChon == _maNhanVienDangNhap)
+            {
+                btnXoa.Enabled = false; // Vô hiệu hóa nút Xóa
+                btnXoa.BackColor = Color.Gray;
+            }
+            else
+            {
+                btnXoa.Enabled = true;
+                btnXoa.BackColor = Color.FromArgb(231, 76, 60); // Màu đỏ
+            }
+
+            // --- LOGIC NÚT TÀI KHOẢN (CẤP / XÓA) ---
+            if (tinhTrangTK == "Đã có")
+            {
+                // Nếu đã có -> Chuyển thành nút XÓA TÀI KHOẢN
+                btnThemTaiKhoan.Text = "Xóa Tài Khoản ❌";
+                btnThemTaiKhoan.BackColor = Color.OrangeRed;
+
+                // Bảo vệ: Không được xóa tài khoản Sếp hoặc Chính mình
+                if (maNV_DangChon == ADMIN_BOSS || maNV_DangChon == _maNhanVienDangNhap)
+                {
+                    btnThemTaiKhoan.Enabled = false;
+                    btnThemTaiKhoan.BackColor = Color.Gray;
+                }
+                else
+                {
+                    btnThemTaiKhoan.Enabled = true;
+                }
+            }
+            else
+            {
+                // Nếu chưa có -> Chuyển thành nút CẤP TÀI KHOẢN
+                btnThemTaiKhoan.Text = "Cấp Tài Khoản 🔑";
+                btnThemTaiKhoan.BackColor = Color.FromArgb(255, 128, 0); // Màu Cam
+                btnThemTaiKhoan.Enabled = true;
+            }
+        }
+
+        // --- CHỨC NĂNG: CẤP HOẶC XÓA TÀI KHOẢN ---
+        private void btnThemTaiKhoan_Click(object sender, EventArgs e)
+        {
+            string maNV = txtMaNV.Text;
+
+            // 1. Trường hợp CẤP MỚI
+            if (btnThemTaiKhoan.Text.Contains("Cấp"))
+            {
+                frm_Themtaikhoan frm = new frm_Themtaikhoan(maNV, txtTenNV.Text);
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    LoadData();
+                    // Reset lại giao diện ngay để nút đổi thành "Xóa"
+                    MessageBox.Show("Cấp tài khoản thành công! Nhân viên có thể đăng nhập ngay.");
+                }
+            }
+            // 2. Trường hợp XÓA (THU HỒI)
+            else
+            {
+                // === KIỂM TRA BẢO MẬT: CHẶN XÓA ADMIN GỐC ===
+                if (maNV == ADMIN_BOSS)
+                {
+                    MessageBox.Show("CẤM: Đây là tài khoản Quản Trị Viên Gốc (Boss). Không thể thu hồi quyền truy cập!", "Lỗi Bảo Mật", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    return;
+                }
+
+                if (MessageBox.Show($"Bạn có chắc muốn THU HỒI quyền truy cập (Xóa tài khoản) của {txtTenNV.Text}?",
+                    "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    try
+                    {
+                        SqlParameter[] pars = { new SqlParameter("@Ma_Nhan_Vien", maNV) };
+                        DatabaseHelper.ExecuteNonQuery("SP_XoaTaiKhoanTheoMaNV", pars);
+
+                        MessageBox.Show("Đã xóa tài khoản thành công!");
+                        LoadData();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                    }
+                }
+            }
+        }
+
+        // --- CHỨC NĂNG: XÓA NHÂN VIÊN (Đuổi việc) ---
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            string maNV = txtMaNV.Text;
+
+            // KIỂM TRA BẢO MẬT
+            if (maNV == ADMIN_BOSS)
+            {
+                MessageBox.Show("CẤM: Hồ sơ Quản Trị Viên Gốc không thể bị xóa khỏi hệ thống!", "Cấm", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+            if (maNV == _maNhanVienDangNhap)
+            {
+                MessageBox.Show("Bạn không thể tự xóa hồ sơ của chính mình khi đang làm việc!", "Cấm", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                return;
+            }
+
+            // SỬA LẠI DÒNG NÀY: Dùng MessageBoxIcon.Error hoặc MessageBoxIcon.Stop
+            if (MessageBox.Show($"Bạn có chắc muốn xóa hồ sơ nhân viên {txtTenNV.Text}?\n(Tài khoản đăng nhập của người này cũng sẽ bị xóa theo)",
+                "Xác nhận sa thải", MessageBoxButtons.YesNo, MessageBoxIcon.Error) == DialogResult.Yes)
+            {
+                try
+                {
+                    SqlParameter[] pars = { new SqlParameter("@Ma_Nhan_Vien", maNV) };
+                    DatabaseHelper.ExecuteNonQuery("SP_XoaNhanVien", pars);
+                    MessageBox.Show("Đã xóa nhân viên!");
+                    LoadData();
+                    ResetForm();
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
+            }
+        }
+
+        // ... (Các hàm Thêm, Sửa, ResetForm giữ nguyên logic cũ) ...
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            if (!ValidateInput()) return;
+            try
+            {
+                SqlParameter[] pars = {
+                    new SqlParameter("@Ma_Nhan_Vien", txtMaNV.Text),
+                    new SqlParameter("@Ten_Nhan_Vien", txtTenNV.Text),
+                    new SqlParameter("@NgaySinh", dtpNgaySinh.Value),
+                    new SqlParameter("@GioiTinh", cboGioiTinh.Text),
+                    new SqlParameter("@So_Dien_Thoai", txtSDT.Text),
+                    new SqlParameter("@DiaChi", txtDiaChi.Text)
+                };
+                DatabaseHelper.ExecuteNonQuery("SP_ThemNhanVien", pars);
+                MessageBox.Show("Thêm thành công!");
+                LoadData(); ResetForm();
+            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter("SP_LayDanhSachNhanVien", conn);
-                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-
-                    dgvNhanVien.DataSource = dt;
-
-                    dgvNhanVien.Columns["Ma_Nhan_Vien"].HeaderText = "Mã NV";
-                    dgvNhanVien.Columns["Ten_Nhan_Vien"].HeaderText = "Tên Nhân Viên";
-                    dgvNhanVien.Columns["NgaySinh"].HeaderText = "Ngày Sinh";
-                    dgvNhanVien.Columns["GioiTinh"].HeaderText = "Giới Tính";
-                    dgvNhanVien.Columns["So_Dien_Thoai"].HeaderText = "Số Điện Thoại";
-                    dgvNhanVien.Columns["DiaChi"].HeaderText = "Địa Chỉ";
-                    dgvNhanVien.Columns["TinhTrangTaiKhoan"].HeaderText = "Tài Khoản";
-                }
+                SqlParameter[] pars = {
+                    new SqlParameter("@Ma_Nhan_Vien", txtMaNV.Text),
+                    new SqlParameter("@Ten_Nhan_Vien", txtTenNV.Text),
+                    new SqlParameter("@NgaySinh", dtpNgaySinh.Value),
+                    new SqlParameter("@GioiTinh", cboGioiTinh.Text),
+                    new SqlParameter("@So_Dien_Thoai", txtSDT.Text),
+                    new SqlParameter("@DiaChi", txtDiaChi.Text)
+                };
+                DatabaseHelper.ExecuteNonQuery("SP_SuaNhanVien", pars);
+                MessageBox.Show("Cập nhật thành công!");
+                LoadData(); ResetForm();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải danh sách nhân viên: " + ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        private void LamMoiForm()
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        private void ResetForm()
         {
             txtMaNV.ReadOnly = false;
             txtMaNV.Clear();
             txtTenNV.Clear();
+            txtSDT.Clear();
             txtDiaChi.Clear();
-            txtSoDienThoai.Clear();
-            comboBox1.SelectedIndex = -1;
             dtpNgaySinh.Value = DateTime.Now;
-            dgvNhanVien.ClearSelection();
+            cboGioiTinh.SelectedIndex = 0;
 
-            btn_Them.Enabled = true;
-            btn_Xoa.Enabled = false;
-            btn_Sua.Enabled = false;
+            btnThem.Enabled = true;
+            btnSua.Enabled = false;
+            btnXoa.Enabled = false;
+
+            // Reset nút tài khoản về mặc định
             btnThemTaiKhoan.Enabled = false;
-            btnThemTaiKhoan.Text = "Thêm tài khoản";
+            btnThemTaiKhoan.Text = "Cấp Tài Khoản 🔑";
+            btnThemTaiKhoan.BackColor = Color.FromArgb(255, 128, 0);
         }
 
-        private void dgvNhanVien_CellClick(object sender, DataGridViewCellEventArgs e)
+        private bool ValidateInput()
         {
-            if (e.RowIndex < 0) return; // Bỏ qua nếu click vào tiêu đề
-
-            // 1. Lấy dữ liệu từ dòng được chọn
-            DataGridViewRow row = dgvNhanVien.Rows[e.RowIndex];
-
-            // 2. Gán lên các control trong GroupBox
-            txtMaNV.Text = row.Cells["Ma_Nhan_Vien"].Value.ToString();
-            txtTenNV.Text = row.Cells["Ten_Nhan_Vien"].Value.ToString();
-            txtDiaChi.Text = row.Cells["DiaChi"].Value.ToString();
-            txtSoDienThoai.Text = row.Cells["So_Dien_Thoai"].Value.ToString();
-            dtpNgaySinh.Value = Convert.ToDateTime(row.Cells["NgaySinh"].Value);
-            comboBox1.SelectedItem = row.Cells["GioiTinh"].Value.ToString();
-
-            // 3. Xử lý trạng thái nút "Thêm tài khoản"
-            string tinhTrangTK = row.Cells["TinhTrangTaiKhoan"].Value.ToString();
-            if (tinhTrangTK == "Đã có")
-            {
-                btnThemTaiKhoan.Enabled = true;
-                btnThemTaiKhoan.Text = "Xóa tài khoản";
-            }
-            else
-            {
-                btnThemTaiKhoan.Enabled = true;
-                btnThemTaiKhoan.Text = "Thêm tài khoản";
-            }
-
-            txtMaNV.ReadOnly = true;
-            btn_Them.Enabled = false;
-            btn_Sua.Enabled = true;
-            btn_Xoa.Enabled = true;
-        }
-
-        private void btn_Them_Click(object sender, EventArgs e)
-        {
-            if (string.IsNullOrEmpty(txtMaNV.Text))
-            {
-                MessageBox.Show("Vui lòng nhập Mã Nhân Viên.");
-                txtMaNV.Focus();
-                return;
-            }
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("SP_ThemNhanVien", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-
-                        cmd.Parameters.AddWithValue("@Ma_Nhan_Vien", txtMaNV.Text);
-                        cmd.Parameters.AddWithValue("@Ten_Nhan_Vien", txtTenNV.Text);
-                        cmd.Parameters.AddWithValue("@NgaySinh", dtpNgaySinh.Value);
-                        cmd.Parameters.AddWithValue("@GioiTinh", comboBox1.SelectedItem.ToString());
-                        cmd.Parameters.AddWithValue("@So_Dien_Thoai", txtSoDienThoai.Text);
-                        cmd.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
-
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Thêm nhân viên thành công!");
-
-                        LoadDanhSachNhanVien();
-                        LamMoiForm();
-                    }
-                }
-            }
-            catch (SqlException ex)
-            {
-                MessageBox.Show("Lỗi khi thêm nhân viên: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi không xác định: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            }
-        }
-
-        private void btn_Sua_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("SP_SuaNhanVien", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Ma_Nhan_Vien", txtMaNV.Text);
-                        cmd.Parameters.AddWithValue("@Ten_Nhan_Vien", txtTenNV.Text);
-                        cmd.Parameters.AddWithValue("@NgaySinh", dtpNgaySinh.Value);
-                        cmd.Parameters.AddWithValue("@GioiTinh", comboBox1.SelectedItem.ToString());
-                        cmd.Parameters.AddWithValue("@So_Dien_Thoai", txtSoDienThoai.Text);
-                        cmd.Parameters.AddWithValue("@DiaChi", txtDiaChi.Text);
-
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Cập nhật thông tin thành công!");
-
-                        LoadDanhSachNhanVien();
-                        LamMoiForm();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi sửa nhân viên: " + ex.Message);
-            }
-        }
-
-        private void btn_Xoa_Click(object sender, EventArgs e)
-        {
-            if (txtMaNV.Text == _maNhanVienDangNhap)
-            {
-                MessageBox.Show("Bạn không thể xóa hồ sơ của chính mình khi đang đăng nhập!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                return; 
-            }
-
-            if (MessageBox.Show("Bạn có chắc muốn xóa nhân viên này không?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-            {
-                return;
-            }
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("SP_XoaNhanVien", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@Ma_Nhan_Vien", txtMaNV.Text);
-
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Xóa nhân viên thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        LoadDanhSachNhanVien();
-                        LamMoiForm();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi xóa nhân viên: " + ex.Message);
-            }
-        }
-
-        private void btn_Lammoi_Click(object sender, EventArgs e)
-        {
-            LamMoiForm();
-        }
-
-        private void btnThemTaiKhoan_Click(object sender, EventArgs e)
-        {
-            string maNV = txtMaNV.Text;
-            string tenNV = txtTenNV.Text;
-
-            if (string.IsNullOrEmpty(maNV))
-            {
-                MessageBox.Show("Vui lòng chọn một nhân viên từ danh sách.", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-
-            if (btnThemTaiKhoan.Text == "Thêm tài khoản")
-            {
-                frm_Themtaikhoan popupForm = new frm_Themtaikhoan(maNV, tenNV);
-                popupForm.ShowDialog();
-            }
-            else
-            {
-                if (maNV == _maNhanVienDangNhap)
-                {
-                    MessageBox.Show("Bạn không thể xóa tài khoản mình đang sử dụng!", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Stop);
-                    return;
-                }
-
-                if (MessageBox.Show($"Bạn có chắc muốn XÓA tài khoản của nhân viên {tenNV} không?",
-                                    "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
-                {
-                    return;
-                }
-
-                try
-                {
-                    using (SqlConnection conn = new SqlConnection(connectionString))
-                    {
-                        using (SqlCommand cmd = new SqlCommand("SP_XoaTaiKhoanTheoMaNV", conn))
-                        {
-                            cmd.CommandType = CommandType.StoredProcedure;
-                            cmd.Parameters.AddWithValue("@Ma_Nhan_Vien", maNV);
-
-                            conn.Open();
-                            cmd.ExecuteNonQuery();
-                            MessageBox.Show("Xóa tài khoản thành công!");
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Lỗi khi xóa tài khoản: " + ex.Message);
-                }
-            }
-
-            LoadDanhSachNhanVien();
-            LamMoiForm();
-        }
-
-        private void pnlChucNang_Paint(object sender, PaintEventArgs e)
-        {
-
+            if (string.IsNullOrWhiteSpace(txtMaNV.Text)) { MessageBox.Show("Chưa nhập Mã NV!"); return false; }
+            if (string.IsNullOrWhiteSpace(txtTenNV.Text)) { MessageBox.Show("Chưa nhập Tên NV!"); return false; }
+            return true;
         }
     }
 }

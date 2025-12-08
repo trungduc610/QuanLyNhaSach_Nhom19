@@ -1,12 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 
@@ -14,138 +8,183 @@ namespace QuanLy_NhaSach
 {
     public partial class UCTKDoanhThu : UserControl
     {
-        string connectionString = @"Data Source=DESKTOP-DF0P4U3\SQLEXPRESS;Initial Catalog=NhaSach;User ID=sa;Password=123;TrustServerCertificate=True";
         public UCTKDoanhThu()
         {
             InitializeComponent();
+
+            NotificationHelper.TransactionCompleted += HandleTransactionCompleted;
+
+            this.VisibleChanged += new EventHandler(UCTKDoanhThu_VisibleChanged);
         }
 
         private void UCTKDoanhThu_Load(object sender, EventArgs e)
         {
-            dgvBaoCao.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            // 1. Cài đặt ngày mặc định (Từ đầu tháng đến hiện tại)
-            DateTime now = DateTime.Now;
-            dtpTuNgay.Value = new DateTime(now.Year, now.Month, 1);
-            dtpDenNgay.Value = now;
-            dtpTuNgay.Format = DateTimePickerFormat.Custom;
-            dtpTuNgay.CustomFormat = "dd/MM/yyyy";
-            dtpDenNgay.Format = DateTimePickerFormat.Custom;
-            dtpDenNgay.CustomFormat = "dd/MM/yyyy";
+            // Thiết lập mặc định: Từ đầu tháng đến hôm nay
+            dtpBatDau.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            dtpKetThuc.Value = DateTime.Now;
 
-            // 2. Cài đặt biểu đồ (Chỉ còn Chart Doanh Thu)
-            CaiDatBieuDo();
-
-            // 3. Tải dữ liệu
-            LoadDuLieuThongKe();
+            LoadBaoCao();
         }
 
-        private void CaiDatBieuDo()
+        private void UCTKDoanhThu_VisibleChanged(object sender, EventArgs e)
         {
-            chartDoanhThu.Series.Clear();
-            chartDoanhThu.Titles.Clear();
-            chartDoanhThu.Titles.Add("Biểu đồ Tài Chính (Thu - Chi)");
+            if (this.Visible == true)
+            {
+                LoadBaoCao();
+            }
+        }
 
-            // Tạo Series Doanh Thu (Cột Xanh)
-            Series sThu = new Series("Doanh Thu");
-            sThu.ChartType = SeriesChartType.Column;
-            sThu.Color = Color.MediumSeaGreen;
-            sThu.IsValueShownAsLabel = true; // Hiện số tiền trên cột
-            chartDoanhThu.Series.Add(sThu);
-
-            // Tạo Series Chi Phí (Cột Đỏ)
-            Series sChi = new Series("Chi Phí");
-            sChi.ChartType = SeriesChartType.Column;
-            sChi.Color = Color.Tomato;
-            sChi.IsValueShownAsLabel = true; // Hiện số tiền trên cột
-            chartDoanhThu.Series.Add(sChi);
-
-            // Định dạng trục X (Ngày tháng)
-            chartDoanhThu.ChartAreas[0].AxisX.LabelStyle.Format = "dd/MM";
-            chartDoanhThu.ChartAreas[0].AxisX.Interval = 1; // Hiện tất cả các ngày
+        private void HandleTransactionCompleted()
+        {
+            if (this.Visible)
+            {
+                LoadBaoCao();
+            }
         }
 
         private void btnXemBaoCao_Click(object sender, EventArgs e)
         {
-            LoadDuLieuThongKe();
+            LoadBaoCao();
         }
 
-        private void LoadDuLieuThongKe()
+        private void LoadBaoCao()
         {
+            if (dtpBatDau.Value > dtpKetThuc.Value)
+            {
+                MessageBox.Show("Ngày bắt đầu không được sau ngày kết thúc!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                // 1. TẠO THAM SỐ CHO TỔNG HỢP (Lần gọi 1)
+                SqlParameter[] parsSummary = {
+                    new SqlParameter("@NgayBatDau", dtpBatDau.Value.Date),
+                    new SqlParameter("@NgayKetThuc", dtpKetThuc.Value.Date)
+                };
+
+                // Tải Báo cáo Tổng hợp
+                DataTable dtSummary = DatabaseHelper.GetDataTable("SP_BaoCaoTaiChinh", parsSummary);
+
+                if (dtSummary.Rows.Count > 0)
                 {
-                    using (SqlCommand cmd = new SqlCommand("SP_BaoCaoTaiChinh", conn))
+                    DataRow row = dtSummary.Rows[0];
+                    decimal giaVon = Convert.ToDecimal(row["TongGiaVon"]);
+                    decimal doanhThu = Convert.ToDecimal(row["TongDoanhThu"]);
+                    decimal loiNhuan = Convert.ToDecimal(row["LoiNhuanGop"]);
+
+                    // Hiển thị kết quả Tổng hợp
+                    lblGiaVon.Text = giaVon.ToString("N0") + " VNĐ";
+                    lblDoanhThu.Text = doanhThu.ToString("N0") + " VNĐ";
+                    lblLoiNhuan.Text = loiNhuan.ToString("N0") + " VNĐ";
+
+                    // Đổi màu lợi nhuận
+                    if (loiNhuan < 0)
                     {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@TuNgay", dtpTuNgay.Value);
-                        cmd.Parameters.AddWithValue("@DenNgay", dtpDenNgay.Value);
-
-                        SqlDataAdapter da = new SqlDataAdapter(cmd);
-                        DataTable dt = new DataTable();
-                        da.Fill(dt);
-
-                        // 1. Hiển thị lên DataGridView
-                        dgvBaoCao.DataSource = dt;
-
-                        // Format hiển thị tiền tệ và đổi tên cột cho đẹp
-                        dgvBaoCao.Columns["Ngay"].HeaderText = "Ngày";
-                        dgvBaoCao.Columns["DoanhThu"].HeaderText = "Doanh Thu";
-                        dgvBaoCao.Columns["DoanhThu"].DefaultCellStyle.Format = "N0";
-                        dgvBaoCao.Columns["ChiPhi"].HeaderText = "Chi Phí Nhập";
-                        dgvBaoCao.Columns["ChiPhi"].DefaultCellStyle.Format = "N0";
-                        dgvBaoCao.Columns["LoiNhuan"].HeaderText = "Lợi Nhuận";
-                        dgvBaoCao.Columns["LoiNhuan"].DefaultCellStyle.Format = "N0";
-
-                        // 2. Tính tổng hiển thị lên 3 Thẻ (Labels)
-                        decimal tongDoanhThu = 0;
-                        decimal tongChiPhi = 0;
-                        decimal tongLoiNhuan = 0;
-
-                        foreach (DataRow row in dt.Rows)
-                        {
-                            tongDoanhThu += Convert.ToDecimal(row["DoanhThu"]);
-                            tongChiPhi += Convert.ToDecimal(row["ChiPhi"]);
-                        }
-                        tongLoiNhuan = tongDoanhThu - tongChiPhi;
-
-                        lblTongDoanhThu.Text = string.Format("{0:N0} VNĐ", tongDoanhThu);
-                        lblTongChiPhi.Text = string.Format("{0:N0} VNĐ", tongChiPhi);
-                        lblLoiNhuan.Text = string.Format("{0:N0} VNĐ", tongLoiNhuan);
-
-                        // Đổi màu Lợi nhuận (Lãi = Xanh, Lỗ = Đỏ)
-                        if (tongLoiNhuan >= 0) lblLoiNhuan.ForeColor = Color.Green;
-                        else lblLoiNhuan.ForeColor = Color.Red;
-
-                        // 3. Vẽ lên Biểu đồ
-                        chartDoanhThu.Series["Doanh Thu"].Points.Clear();
-                        chartDoanhThu.Series["Chi Phí"].Points.Clear();
-
-                        foreach (DataRow row in dt.Rows)
-                        {
-                            DateTime ngay = Convert.ToDateTime(row["Ngay"]);
-                            decimal thu = Convert.ToDecimal(row["DoanhThu"]);
-                            decimal chi = Convert.ToDecimal(row["ChiPhi"]);
-
-                            // Chỉ vẽ những ngày có số liệu > 0 để biểu đồ đỡ rối
-                            if (thu > 0 || chi > 0)
-                            {
-                                chartDoanhThu.Series["Doanh Thu"].Points.AddXY(ngay, thu);
-                                chartDoanhThu.Series["Chi Phí"].Points.AddXY(ngay, chi);
-                            }
-                        }
+                        pnlLoiNhuan.BackColor = System.Drawing.Color.FromArgb(192, 57, 43); // Đỏ nếu lỗ
+                    }
+                    else
+                    {
+                        pnlLoiNhuan.BackColor = System.Drawing.Color.FromArgb(46, 204, 113); // Xanh nếu lời
                     }
                 }
+                else
+                {
+                    // Trường hợp không có dữ liệu
+                    lblGiaVon.Text = lblDoanhThu.Text = lblLoiNhuan.Text = "0 VNĐ";
+                    pnlLoiNhuan.BackColor = System.Drawing.Color.FromArgb(46, 204, 113);
+                }
+
+                // 2. Tải Dữ liệu Chi tiết: Gọi hàm chi tiết sau khi có kết quả tổng hợp
+                LoadChiTietBaoCao();
+
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi thống kê: " + ex.Message);
+                MessageBox.Show("Lỗi tải báo cáo: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblGiaVon.Text = lblDoanhThu.Text = lblLoiNhuan.Text = "LỖI";
             }
         }
 
-        private void groupBox1_Enter(object sender, EventArgs e)
+        private void LoadChiTietBaoCao()
         {
+            try
+            {
+                // LƯU GIÁ TRỊ NGÀY RA MẢNG OBJECT
+                object[] dateValues = { dtpBatDau.Value.Date, dtpKetThuc.Value.Date };
 
+                // HÀM TẠO MẢNG THAM SỐ MỚI (Lambda Function)
+                Func<SqlParameter[]> createParams = () => new SqlParameter[]
+                {
+                    new SqlParameter("@NgayBatDau", dateValues[0]),
+                    new SqlParameter("@NgayKetThuc", dateValues[1])
+                };
+
+
+                // 2.1. Tải dữ liệu cho Biểu đồ (Biểu đồ Cột) - LẦN GỌI 2
+                DataTable dtChart = DatabaseHelper.GetDataTable("SP_BaoCaoChiTietTaiChinh", createParams());
+                DrawChart(dtChart);
+
+                // 2.2. Tải Lịch sử Bán hàng - LẦN GỌI 3
+                DataTable dtSales = DatabaseHelper.GetDataTable("SP_LayDanhSachHoaDonTheoNgay", createParams());
+                dgvLichSuBan.DataSource = dtSales;
+
+                // 2.3. Tải Lịch sử Nhập hàng - LẦN GỌI 4
+                DataTable dtImports = DatabaseHelper.GetDataTable("SP_LayDanhSachPhieuNhapTheoNgay", createParams());
+                dgvLichSuNhap.DataSource = dtImports;
+            }
+            catch (Exception ex)
+            {
+                // Nếu lỗi xảy ra khi tái sử dụng tham số, nó sẽ bị bắt ở đây
+                MessageBox.Show("Lỗi tải chi tiết báo cáo: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void DrawChart(DataTable dtChart)
+        {
+            chartDoanhThu.Series.Clear();
+            chartDoanhThu.Titles.Clear();
+
+            // Cấu hình tiêu đề
+            chartDoanhThu.Titles.Add("Doanh thu & Giá vốn theo ngày");
+
+            // Series 1: Doanh thu
+            Series seriesRevenue = new Series("Doanh Thu");
+            seriesRevenue.ChartType = SeriesChartType.Column;
+            seriesRevenue.IsValueShownAsLabel = true;
+            seriesRevenue.Color = System.Drawing.Color.FromArgb(52, 152, 219); // Xanh dương
+
+            // Series 2: Giá vốn
+            Series seriesCost = new Series("Giá Vốn");
+            seriesCost.ChartType = SeriesChartType.Column;
+            seriesCost.IsValueShownAsLabel = true;
+            seriesCost.Color = System.Drawing.Color.FromArgb(243, 156, 18); // Cam
+
+            foreach (DataRow row in dtChart.Rows)
+            {
+                // Đảm bảo dữ liệu không bị NULL trước khi Convert
+                if (row["NgayBaoCao"] != DBNull.Value && row["DoanhThuNgay"] != DBNull.Value)
+                {
+                    DateTime date = Convert.ToDateTime(row["NgayBaoCao"]);
+                    string dateLabel = date.ToString("dd/MM");
+
+                    // Lấy giá trị an toàn
+                    decimal revenue = Convert.ToDecimal(row["DoanhThuNgay"]);
+                    decimal cost = Convert.ToDecimal(row["GiaVonNgay"]);
+
+                    // Thêm điểm dữ liệu
+                    seriesRevenue.Points.AddXY(dateLabel, revenue);
+                    seriesCost.Points.AddXY(dateLabel, cost);
+                }
+            }
+
+            chartDoanhThu.Series.Add(seriesRevenue);
+            chartDoanhThu.Series.Add(seriesCost);
+
+            // Cấu hình trục X/Y
+            chartDoanhThu.ChartAreas[0].AxisX.Title = "Ngày";
+            chartDoanhThu.ChartAreas[0].AxisY.Title = "Giá trị (VNĐ)";
+            chartDoanhThu.ChartAreas[0].AxisY.LabelStyle.Format = "N0";
         }
     }
 }

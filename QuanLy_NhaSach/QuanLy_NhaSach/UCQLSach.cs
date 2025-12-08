@@ -1,182 +1,146 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace QuanLy_NhaSach
 {
     public partial class UCQLSach : UserControl
     {
-        string connectionString = @"Data Source=DESKTOP-DF0P4U3\SQLEXPRESS;Initial Catalog=NhaSach;User ID=sa;Password=123;Encrypt=True;TrustServerCertificate=True";
+        private DataTable _dtSach;
+        private string _duongDanAnh = "";
 
         public UCQLSach()
         {
             InitializeComponent();
+
+            this.VisibleChanged += new EventHandler(UCQLSach_VisibleChanged);
         }
 
         private void UCQLSach_Load(object sender, EventArgs e)
         {
-            LoadDataGridView();
-            LoadComboBoxes(); 
-            LamMoiForm();
-
-            dgvSach.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            LoadData();
+            LoadComboBox();
+            ResetForm();
         }
 
-        private void txt_NXB_TextChanged(object sender, EventArgs e)
+        private void UCQLSach_VisibleChanged(object sender, EventArgs e)
         {
-
-        }
-
-        private void LoadDataGridView()
-        {
-            try
+            if (this.Visible == true)
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter("SP_LayDanhSachSach", conn);
-                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
-                    dgvSach.DataSource = dt;
-
-                    // Định dạng tiêu đề cột
-                    dgvSach.Columns["MaSach"].HeaderText = "Mã Sách";
-                    dgvSach.Columns["TenSach"].HeaderText = "Tên Sách";
-                    dgvSach.Columns["Ten_TheLoai"].HeaderText = "Thể Loại";
-                    dgvSach.Columns["TacGia"].HeaderText = "Tác Giả";
-                    dgvSach.Columns["Nha_Xuat_Ban"].HeaderText = "Nhà Xuất Bản";
-                    dgvSach.Columns["SoLuong"].HeaderText = "Số Lượng";
-                    dgvSach.Columns["GiaNhap"].HeaderText = "Giá Nhập";
-                    dgvSach.Columns["GiaBan"].HeaderText = "Giá Bán";
-
-                    if (dgvSach.Columns.Contains("ID_TheLoai"))
-                        dgvSach.Columns["ID_TheLoai"].Visible = false;
-
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi tải danh sách sách: " + ex.Message);
+                LoadData();
             }
         }
 
-        private void LoadComboBoxes()
+        private void LoadData()
         {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    conn.Open();
+            _dtSach = DatabaseHelper.GetDataTable("SP_LayDanhSachSach");
 
-                    // 1. Load Thể Loại
-                    SqlDataAdapter adapterTL = new SqlDataAdapter("SP_LayDanhSachTheLoai", conn);
-                    DataTable dtTL = new DataTable();
-                    adapterTL.Fill(dtTL);
-                    cboTheLoai.DataSource = dtTL;
-                    cboTheLoai.DisplayMember = "Ten_TheLoai";
-                    cboTheLoai.ValueMember = "ID_TheLoai";
-                }
-            }
-            catch (Exception ex)
+            if (!_dtSach.Columns.Contains("TenSach_KhongDau"))
             {
-                MessageBox.Show("Lỗi tải ComboBox: " + ex.Message);
+                _dtSach.Columns.Add("TenSach_KhongDau");
             }
+
+            foreach (DataRow r in _dtSach.Rows)
+            {
+                string tenSach = r["TenSach"] != DBNull.Value ? r["TenSach"].ToString() : "";
+                r["TenSach_KhongDau"] = DatabaseHelper.XoaDau(tenSach).ToLower();
+            }
+
+            BindingSource bs = new BindingSource();
+            bs.DataSource = _dtSach;
+            dgvSach.DataSource = bs;
+
+            if (dgvSach.Columns.Contains("ID_TheLoai")) dgvSach.Columns["ID_TheLoai"].Visible = false;
+            if (dgvSach.Columns.Contains("HinhAnh")) dgvSach.Columns["HinhAnh"].Visible = false;
+            if (dgvSach.Columns.Contains("TenSach_KhongDau")) dgvSach.Columns["TenSach_KhongDau"].Visible = false;
+            if (dgvSach.Columns.Contains("TrangThai")) dgvSach.Columns["TrangThai"].Visible = false;
         }
 
-        private void LamMoiForm()
+        private void LoadComboBox()
         {
-            txtMaSach.Clear();
-            txtTenSach.Clear();
-            txtTacGia.Clear();
-            txtNhaXuatBan.Clear();
-            txtGiaNhap.Clear();
-            txtGiaBan.Clear();
-            txtSoLuong.Text = "0";
-            cboTheLoai.SelectedIndex = -1;
+            // 1. Load Thể loại
+            cboTheLoai.DataSource = DatabaseHelper.GetDataTable("SELECT * FROM THELOAI WHERE TrangThai = 1");
+            cboTheLoai.DisplayMember = "Ten_TheLoai";
+            cboTheLoai.ValueMember = "ID_TheLoai";
 
-            dgvSach.ClearSelection();
-
-            txtMaSach.ReadOnly = false;
-            txtSoLuong.ReadOnly = false;
-
-            btnThem.Enabled = true;
-            btnSua.Enabled = false;
-            btnXoa.Enabled = false;
+            // 2. Load Nhà Cung Cấp
+            cboNXB.DataSource = DatabaseHelper.GetDataTable("SELECT * FROM NHACUNGCAP WHERE TrangThai = 1");
+            cboNXB.DisplayMember = "Ten_Nha_Cung_Cap";
+            cboNXB.ValueMember = "Ten_Nha_Cung_Cap";
         }
 
         private void dgvSach_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-            if (e.RowIndex >= dgvSach.Rows.Count) return;
 
             DataGridViewRow row = dgvSach.Rows[e.RowIndex];
 
             txtMaSach.Text = row.Cells["MaSach"].Value?.ToString();
             txtTenSach.Text = row.Cells["TenSach"].Value?.ToString();
+            cboTheLoai.SelectedValue = row.Cells["ID_TheLoai"].Value;
             txtTacGia.Text = row.Cells["TacGia"].Value?.ToString();
-            txtNhaXuatBan.Text = row.Cells["Nha_Xuat_Ban"].Value?.ToString();
+
+            // Gán NXB vào ComboBox
+            cboNXB.SelectedValue = row.Cells["Nha_Xuat_Ban"].Value?.ToString();
+
             txtGiaNhap.Text = row.Cells["GiaNhap"].Value?.ToString();
             txtGiaBan.Text = row.Cells["GiaBan"].Value?.ToString();
-            txtSoLuong.Text = row.Cells["SoLuong"].Value?.ToString();
 
-            cboTheLoai.SelectedValue = row.Cells["ID_TheLoai"].Value;
+            if (row.Cells["SoLuong"].Value != DBNull.Value)
+                numSoLuong.Value = Convert.ToDecimal(row.Cells["SoLuong"].Value);
 
+            // Xử lý hình ảnh
+            string path = row.Cells["HinhAnh"].Value?.ToString();
+            if (!string.IsNullOrEmpty(path) && File.Exists(path))
+            {
+                ptbHinhAnh.Image = Image.FromFile(path);
+                _duongDanAnh = path;
+            }
+            else
+            {
+                ptbHinhAnh.Image = null;
+                _duongDanAnh = "";
+            }
 
+            // Khóa mã sách khi sửa
             txtMaSach.ReadOnly = true;
-            txtSoLuong.ReadOnly = true;
-
             btnThem.Enabled = false;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
         }
 
-        private void btnLammoi_Click(object sender, EventArgs e)
-        {
-            LamMoiForm();
-        }
-
         private void btnThem_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtMaSach.Text))
-            {
-                MessageBox.Show("Vui lòng nhập Mã Sách.");
-                txtMaSach.Focus();
-                return;
-            }
+            if (!ValidateInput()) return;
+
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("SP_ThemSach", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@MaSach", txtMaSach.Text);
-                        cmd.Parameters.AddWithValue("@TenSach", txtTenSach.Text);
-                        cmd.Parameters.AddWithValue("@TacGia", txtTacGia.Text);
-                        cmd.Parameters.AddWithValue("@Nha_Xuat_Ban", txtNhaXuatBan.Text);
-                        cmd.Parameters.AddWithValue("@GiaNhap", Convert.ToDecimal(txtGiaNhap.Text));
-                        cmd.Parameters.AddWithValue("@GiaBan", Convert.ToDecimal(txtGiaBan.Text));
-                        cmd.Parameters.AddWithValue("@SoLuong", Convert.ToInt32(txtSoLuong.Text));
-                        cmd.Parameters.AddWithValue("@ID_TheLoai", cboTheLoai.SelectedValue);
+                SqlParameter[] pars = {
+                    new SqlParameter("@MaSach", txtMaSach.Text),
+                    new SqlParameter("@ID_TheLoai", cboTheLoai.SelectedValue),
+                    new SqlParameter("@TenSach", txtTenSach.Text),
+                    new SqlParameter("@TacGia", txtTacGia.Text),
+                    // Lấy Tên NXB từ ComboBox
+                    new SqlParameter("@Nha_Xuat_Ban", cboNXB.SelectedValue != null ? cboNXB.SelectedValue.ToString() : ""),
+                    new SqlParameter("@GiaNhap", decimal.Parse(txtGiaNhap.Text)),
+                    new SqlParameter("@GiaBan", decimal.Parse(txtGiaBan.Text)),
+                    new SqlParameter("@SoLuong", (int)numSoLuong.Value),
+                    new SqlParameter("@HinhAnh", _duongDanAnh)
+                };
 
+                // GỌI HELPER
+                DatabaseHelper.ExecuteNonQuery("SP_ThemSach", pars);
 
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Thêm sách mới thành công!");
-
-                        LoadDataGridView();
-                        LamMoiForm();
-                    }
-                }
+                MessageBox.Show("Thêm thành công!");
+                LoadData();
+                ResetForm();
             }
-            catch (SqlException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Lỗi CSDL", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            catch (FormatException)
-            {
-                MessageBox.Show("Vui lòng kiểm tra lại định dạng số (Giá, Số lượng).", "Lỗi nhập liệu", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -184,92 +148,97 @@ namespace QuanLy_NhaSach
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    using (SqlCommand cmd = new SqlCommand("SP_SuaSach", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@MaSach", txtMaSach.Text);
-                        cmd.Parameters.AddWithValue("@TenSach", txtTenSach.Text);
-                        cmd.Parameters.AddWithValue("@TacGia", txtTacGia.Text);
-                        cmd.Parameters.AddWithValue("@Nha_Xuat_Ban", txtNhaXuatBan.Text);
-                        cmd.Parameters.AddWithValue("@GiaNhap", Convert.ToDecimal(txtGiaNhap.Text));
-                        cmd.Parameters.AddWithValue("@GiaBan", Convert.ToDecimal(txtGiaBan.Text));
-                        cmd.Parameters.AddWithValue("@ID_TheLoai", cboTheLoai.SelectedValue);
+                SqlParameter[] pars = {
+                    new SqlParameter("@MaSach", txtMaSach.Text),
+                    new SqlParameter("@ID_TheLoai", cboTheLoai.SelectedValue),
+                    new SqlParameter("@TenSach", txtTenSach.Text),
+                    new SqlParameter("@TacGia", txtTacGia.Text),
+                    new SqlParameter("@Nha_Xuat_Ban", cboNXB.SelectedValue != null ? cboNXB.SelectedValue.ToString() : ""),
+                    new SqlParameter("@GiaNhap", decimal.Parse(txtGiaNhap.Text)),
+                    new SqlParameter("@GiaBan", decimal.Parse(txtGiaBan.Text)),
+                    new SqlParameter("@HinhAnh", _duongDanAnh)
+                };
 
+                DatabaseHelper.ExecuteNonQuery("SP_SuaSach", pars);
 
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Cập nhật sách thành công!");
-
-                        LoadDataGridView();
-                        LamMoiForm();
-                    }
-                }
+                MessageBox.Show("Cập nhật thành công!");
+                LoadData();
+                ResetForm();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Lỗi khi cập nhật sách: " + ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn có chắc muốn xóa cuốn sách này?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show("Bạn muốn xóa sách này?", "Xác nhận", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                return;
-            }
-
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
+                try
                 {
-                    using (SqlCommand cmd = new SqlCommand("SP_XoaSach", conn))
-                    {
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("@MaSach", txtMaSach.Text);
+                    SqlParameter[] pars = { new SqlParameter("@MaSach", txtMaSach.Text) };
+                    DatabaseHelper.ExecuteNonQuery("SP_XoaSach", pars);
 
-                        conn.Open();
-                        cmd.ExecuteNonQuery();
-                        MessageBox.Show("Xóa sách thành công!");
-
-                        LoadDataGridView();
-                        LamMoiForm();
-                    }
+                    MessageBox.Show("Đã xóa sách!");
+                    LoadData();
+                    ResetForm();
                 }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 547)
-                {
-                    MessageBox.Show("Không thể xóa sách này vì đã có trong hóa đơn hoặc phiếu nhập.", "Lỗi ràng buộc", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-                else
-                {
-                    MessageBox.Show("Lỗi CSDL: " + ex.Message);
-                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
         }
 
-        private void btn_Timkiem_Click(object sender, EventArgs e)
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
-            try
-            {
-                using (SqlConnection conn = new SqlConnection(connectionString))
-                {
-                    SqlDataAdapter adapter = new SqlDataAdapter("SP_TimKiemSach", conn);
-                    adapter.SelectCommand.CommandType = CommandType.StoredProcedure;
-                    adapter.SelectCommand.Parameters.AddWithValue("@TuKhoa", txtTimKiem.Text);
-                    DataTable dt = new DataTable();
-                    adapter.Fill(dt);
+            string tuKhoa = DatabaseHelper.XoaDau(txtTimKiem.Text.Trim()).ToLower();
+            string filter = string.Format("TenSach LIKE '%{0}%' OR MaSach LIKE '%{0}%' OR TenSach_KhongDau LIKE '%{1}%'",
+                                          txtTimKiem.Text, tuKhoa);
 
-                    dgvSach.DataSource = dt;
-                }
-            }
-            catch (Exception ex)
+            // Lọc trực tiếp trên BindingSource
+            if (dgvSach.DataSource is BindingSource bs)
             {
-                MessageBox.Show("Lỗi khi tìm kiếm: " + ex.Message);
+                bs.Filter = filter;
             }
+        }
+
+        private void btnChonAnh_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Filter = "Ảnh|*.jpg;*.png;*.jpeg";
+            if (dlg.ShowDialog() == DialogResult.OK)
+            {
+                ptbHinhAnh.Image = Image.FromFile(dlg.FileName);
+                _duongDanAnh = dlg.FileName;
+            }
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            ResetForm();
+        }
+
+        private void ResetForm()
+        {
+            txtMaSach.ReadOnly = false;
+            txtMaSach.Clear();
+            txtTenSach.Clear();
+            txtTacGia.Clear();
+            cboNXB.SelectedIndex = -1;
+            cboTheLoai.SelectedIndex = -1;
+            txtGiaNhap.Text = "0";
+            txtGiaBan.Text = "0";
+            numSoLuong.Value = 0;
+            ptbHinhAnh.Image = null;
+            _duongDanAnh = "";
+
+            btnThem.Enabled = true;
+            btnSua.Enabled = false;
+            btnXoa.Enabled = false;
+        }
+
+        private bool ValidateInput()
+        {
+            if (string.IsNullOrWhiteSpace(txtMaSach.Text)) { MessageBox.Show("Chưa nhập Mã sách!"); return false; }
+            if (string.IsNullOrWhiteSpace(txtTenSach.Text)) { MessageBox.Show("Chưa nhập Tên sách!"); return false; }
+            if (cboNXB.SelectedIndex == -1) { MessageBox.Show("Chưa chọn Nhà xuất bản!"); return false; }
+            return true;
         }
     }
 }
