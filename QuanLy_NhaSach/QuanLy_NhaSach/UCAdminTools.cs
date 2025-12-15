@@ -87,7 +87,7 @@ namespace QuanLy_NhaSach
                 using (SqlConnection connMaster = new SqlConnection(masterConnectionString))
                 {
                     connMaster.Open();
-                    using (SqlCommand cmd = new SqlCommand("SP_RestoreDatabase", connMaster))
+                    using (SqlCommand cmd = new SqlCommand("SP_RestoreNhaSach", connMaster))
                     {
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.CommandTimeout = 300; // Tăng timeout cho restore

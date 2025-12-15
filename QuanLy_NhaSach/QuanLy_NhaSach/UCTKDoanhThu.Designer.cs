@@ -2,16 +2,30 @@
 {
     partial class UCTKDoanhThu
     {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null)) components.Dispose();
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
             base.Dispose(disposing);
         }
 
         #region Component Designer generated code
 
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
@@ -19,6 +33,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlTop = new System.Windows.Forms.Panel();
+            this.btn_In = new System.Windows.Forms.Button();
             this.btnXemBaoCao = new System.Windows.Forms.Button();
             this.dtpKetThuc = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
@@ -61,6 +76,7 @@
             // pnlTop
             // 
             this.pnlTop.BackColor = System.Drawing.Color.White;
+            this.pnlTop.Controls.Add(this.btn_In);
             this.pnlTop.Controls.Add(this.btnXemBaoCao);
             this.pnlTop.Controls.Add(this.dtpKetThuc);
             this.pnlTop.Controls.Add(this.label3);
@@ -72,6 +88,21 @@
             this.pnlTop.Name = "pnlTop";
             this.pnlTop.Size = new System.Drawing.Size(1228, 90);
             this.pnlTop.TabIndex = 0;
+            // 
+            // btn_In
+            // 
+            this.btn_In.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            this.btn_In.FlatAppearance.BorderSize = 0;
+            this.btn_In.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_In.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btn_In.ForeColor = System.Drawing.Color.White;
+            this.btn_In.Location = new System.Drawing.Point(1060, 25);
+            this.btn_In.Name = "btn_In";
+            this.btn_In.Size = new System.Drawing.Size(130, 40);
+            this.btn_In.TabIndex = 6;
+            this.btn_In.Text = "In Phiếu 🖨";
+            this.btn_In.UseVisualStyleBackColor = false;
+            this.btn_In.Click += new System.EventHandler(this.btn_In_Click);
             // 
             // btnXemBaoCao
             // 
@@ -355,7 +386,6 @@
             this.Controls.Add(this.pnlTop);
             this.Name = "UCTKDoanhThu";
             this.Size = new System.Drawing.Size(1228, 721);
-            this.Load += new System.EventHandler(this.UCTKDoanhThu_Load);
             this.pnlTop.ResumeLayout(false);
             this.pnlTop.PerformLayout();
             this.pnlBaoCao.ResumeLayout(false);
@@ -404,5 +434,6 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart chartDoanhThu;
         private System.Windows.Forms.DataGridView dgvLichSuBan;
         private System.Windows.Forms.DataGridView dgvLichSuNhap;
+        private System.Windows.Forms.Button btn_In;
     }
 }

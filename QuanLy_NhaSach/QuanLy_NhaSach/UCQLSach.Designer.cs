@@ -2,19 +2,33 @@
 {
     partial class UCQLSach
     {
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null)) components.Dispose();
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
             base.Dispose(disposing);
         }
 
         #region Component Designer generated code
 
+        /// <summary> 
+        /// Required method for Designer support - do not modify 
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle styleHeader = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.pnlInput = new System.Windows.Forms.Panel();
             this.grpThongTin = new System.Windows.Forms.GroupBox();
             this.ptbHinhAnh = new System.Windows.Forms.PictureBox();
@@ -40,6 +54,9 @@
             this.pnlTopData = new System.Windows.Forms.Panel();
             this.txtTimKiem = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
+            this.cboLocTheLoai = new System.Windows.Forms.ComboBox();
+            this.cboLocNXB = new System.Windows.Forms.ComboBox();
+            this.labelLoc = new System.Windows.Forms.Label();
             this.pnlButtons = new System.Windows.Forms.Panel();
             this.btnLamMoi = new System.Windows.Forms.Button();
             this.btnXoa = new System.Windows.Forms.Button();
@@ -121,7 +138,11 @@
             // 
             this.numSoLuong.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.numSoLuong.Location = new System.Drawing.Point(20, 435);
-            this.numSoLuong.Maximum = new decimal(new int[] { 10000, 0, 0, 0 });
+            this.numSoLuong.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
             this.numSoLuong.Name = "numSoLuong";
             this.numSoLuong.Size = new System.Drawing.Size(335, 30);
             this.numSoLuong.TabIndex = 15;
@@ -172,7 +193,7 @@
             this.label6.TabIndex = 10;
             this.label6.Text = "Giá nhập:";
             // 
-            // cboNXB (COMBOBOX MỚI)
+            // cboNXB
             // 
             this.cboNXB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboNXB.Font = new System.Drawing.Font("Segoe UI", 10F);
@@ -281,16 +302,17 @@
             // 
             // dgvSach
             // 
-            this.dgvSach.BackgroundColor = System.Drawing.Color.White;
             this.dgvSach.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            styleHeader.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            styleHeader.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
-            styleHeader.ForeColor = System.Drawing.Color.White;
-            this.dgvSach.ColumnHeadersDefaultCellStyle = styleHeader;
+            this.dgvSach.BackgroundColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.White;
+            this.dgvSach.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvSach.ColumnHeadersHeight = 35;
             this.dgvSach.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSach.Location = new System.Drawing.Point(10, 60);
             this.dgvSach.Name = "dgvSach";
+            this.dgvSach.RowHeadersWidth = 51;
             this.dgvSach.RowTemplate.Height = 30;
             this.dgvSach.Size = new System.Drawing.Size(808, 581);
             this.dgvSach.TabIndex = 2;
@@ -300,6 +322,9 @@
             // 
             this.pnlTopData.Controls.Add(this.txtTimKiem);
             this.pnlTopData.Controls.Add(this.label9);
+            this.pnlTopData.Controls.Add(this.cboLocTheLoai);
+            this.pnlTopData.Controls.Add(this.cboLocNXB);
+            this.pnlTopData.Controls.Add(this.labelLoc);
             this.pnlTopData.Dock = System.Windows.Forms.DockStyle.Top;
             this.pnlTopData.Location = new System.Drawing.Point(10, 10);
             this.pnlTopData.Name = "pnlTopData";
@@ -312,7 +337,7 @@
             this.txtTimKiem.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.txtTimKiem.Location = new System.Drawing.Point(488, 10);
             this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(320, 32);
+            this.txtTimKiem.Size = new System.Drawing.Size(317, 32);
             this.txtTimKiem.TabIndex = 1;
             this.txtTimKiem.TextChanged += new System.EventHandler(this.txtTimKiem_TextChanged);
             // 
@@ -321,11 +346,41 @@
             this.label9.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Segoe UI", 11F);
-            this.label9.Location = new System.Drawing.Point(350, 13);
+            this.label9.Location = new System.Drawing.Point(435, 13);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(132, 25);
+            this.label9.Size = new System.Drawing.Size(47, 25);
             this.label9.TabIndex = 0;
-            this.label9.Text = "Tìm kiếm sách:";
+            this.label9.Text = "Tìm:";
+            // 
+            // cboLocTheLoai
+            // 
+            this.cboLocTheLoai.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLocTheLoai.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboLocTheLoai.FormattingEnabled = true;
+            this.cboLocTheLoai.Location = new System.Drawing.Point(50, 10);
+            this.cboLocTheLoai.Name = "cboLocTheLoai";
+            this.cboLocTheLoai.Size = new System.Drawing.Size(160, 31);
+            this.cboLocTheLoai.TabIndex = 2;
+            // 
+            // cboLocNXB
+            // 
+            this.cboLocNXB.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboLocNXB.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.cboLocNXB.FormattingEnabled = true;
+            this.cboLocNXB.Location = new System.Drawing.Point(220, 10);
+            this.cboLocNXB.Name = "cboLocNXB";
+            this.cboLocNXB.Size = new System.Drawing.Size(160, 31);
+            this.cboLocNXB.TabIndex = 3;
+            // 
+            // labelLoc
+            // 
+            this.labelLoc.AutoSize = true;
+            this.labelLoc.Font = new System.Drawing.Font("Segoe UI", 11F);
+            this.labelLoc.Location = new System.Drawing.Point(3, 13);
+            this.labelLoc.Name = "labelLoc";
+            this.labelLoc.Size = new System.Drawing.Size(45, 25);
+            this.labelLoc.TabIndex = 4;
+            this.labelLoc.Text = "Lọc:";
             // 
             // pnlButtons
             // 
@@ -345,7 +400,7 @@
             this.btnLamMoi.BackColor = System.Drawing.Color.Gray;
             this.btnLamMoi.FlatAppearance.BorderSize = 0;
             this.btnLamMoi.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnLamMoi.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnLamMoi.ForeColor = System.Drawing.Color.White;
             this.btnLamMoi.Location = new System.Drawing.Point(678, 15);
             this.btnLamMoi.Name = "btnLamMoi";
@@ -361,7 +416,7 @@
             this.btnXoa.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(76)))), ((int)(((byte)(60)))));
             this.btnXoa.FlatAppearance.BorderSize = 0;
             this.btnXoa.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnXoa.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnXoa.ForeColor = System.Drawing.Color.White;
             this.btnXoa.Location = new System.Drawing.Point(542, 15);
             this.btnXoa.Name = "btnXoa";
@@ -377,7 +432,7 @@
             this.btnSua.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(243)))), ((int)(((byte)(156)))), ((int)(((byte)(18)))));
             this.btnSua.FlatAppearance.BorderSize = 0;
             this.btnSua.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnSua.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnSua.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnSua.ForeColor = System.Drawing.Color.White;
             this.btnSua.Location = new System.Drawing.Point(406, 15);
             this.btnSua.Name = "btnSua";
@@ -393,7 +448,7 @@
             this.btnThem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
             this.btnThem.FlatAppearance.BorderSize = 0;
             this.btnThem.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnThem.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
+            this.btnThem.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
             this.btnThem.ForeColor = System.Drawing.Color.White;
             this.btnThem.Location = new System.Drawing.Point(270, 15);
             this.btnThem.Name = "btnThem";
@@ -458,5 +513,9 @@
         private System.Windows.Forms.Button btnLamMoi;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtTimKiem;
+
+        private System.Windows.Forms.ComboBox cboLocTheLoai;
+        private System.Windows.Forms.ComboBox cboLocNXB;
+        private System.Windows.Forms.Label labelLoc;
     }
 }

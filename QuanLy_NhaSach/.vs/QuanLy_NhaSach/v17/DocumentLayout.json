@@ -1,62 +1,102 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\",
+  "WorkspaceRootPath": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\uctkdoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\uctkdoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\full_qlns\\quanly_nhasach\\quanly_nhasach\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\ucqlkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\notificationhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\notificationhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\ucqlnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\ucadmintools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucadmintools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\ucbansach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucbansach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\uctkdoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\uctkdoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\ucqlkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\frm_trangchu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_trangchu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\frm_trangchu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_trangchu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\frm_dangnhap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\frm_dangnhap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_dangnhap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|d:\\code\\c#\\quanlynhasach_nhom19-main\\quanly_nhasach\\quanly_nhasach\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\databasehelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\frm_dangnhap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_dangnhap.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\frm_trangchu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_trangchu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\frm_trangchu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_trangchu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\frm_themtaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucbansach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucbansach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucbansach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucbansach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucnhapsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucnhapsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucnhapsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucnhapsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucqlkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucqlkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlkhachhang.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucqlnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucqlnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlnhanvien.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucqlsach.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\uctaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\uctaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\uctaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\uctaikhoan.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\uctkdoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\uctkdoanhthu.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucadmintools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucadmintools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\quanly_nhasach\\ucadmintools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{DE60E486-B2CF-4CC1-82C7-50D91049412E}|QuanLy_NhaSach\\QuanLy_NhaSach.csproj|solutionrelative:quanly_nhasach\\ucadmintools.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -71,83 +111,23 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UCQLSach.cs",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLSach.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs",
-              "RelativeToolTip": "QuanLy_NhaSach\\UCQLSach.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAYAAAAAAAAAA==",
+              "Title": "UCTKDoanhThu.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTKDoanhThu.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCTKDoanhThu.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTKDoanhThu.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\UCTKDoanhThu.cs",
+              "ViewState": "AgIAADkBAAAAAAAAAAAcwEYBAAA5AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:13:06.405Z",
+              "WhenOpened": "2025-12-14T09:29:36.155Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UCQLNhanVien.cs [Design]",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLNhanVien.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLNhanVien.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLNhanVien.cs [Design]",
-              "RelativeToolTip": "QuanLy_NhaSach\\UCQLNhanVien.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:13:02.372Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "UCQLSach.cs [Design]",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLSach.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs [Design]",
-              "RelativeToolTip": "QuanLy_NhaSach\\UCQLSach.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:12:58.999Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UCAdminTools.cs [Design]",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCAdminTools.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCAdminTools.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCAdminTools.cs [Design]",
-              "RelativeToolTip": "QuanLy_NhaSach\\UCAdminTools.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T20:11:49.691Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UCBanSach.cs [Design]",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCBanSach.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCBanSach.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCBanSach.cs [Design]",
-              "RelativeToolTip": "QuanLy_NhaSach\\UCBanSach.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:57:50.066Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "UCQLKhachHang.cs [Design]",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLKhachHang.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLKhachHang.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLKhachHang.cs [Design]",
-              "RelativeToolTip": "QuanLy_NhaSach\\UCQLKhachHang.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:55:22.361Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 21,
               "Title": "UCTKDoanhThu.cs [Design]",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTKDoanhThu.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTKDoanhThu.cs",
               "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCTKDoanhThu.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTKDoanhThu.cs [Design]",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTKDoanhThu.cs [Design]",
               "RelativeToolTip": "QuanLy_NhaSach\\UCTKDoanhThu.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-12-08T19:59:56.167Z",
@@ -155,91 +135,248 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 20,
+              "Title": "UCTaiKhoan.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTaiKhoan.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCTaiKhoan.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTaiKhoan.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\UCTaiKhoan.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T09:29:23.327Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "UCTaiKhoan.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTaiKhoan.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCTaiKhoan.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCTaiKhoan.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T09:29:12.715Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "UCQLSach.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLSach.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\UCQLSach.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAO0AAAAPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T20:13:06.405Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "UCQLSach.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLSach.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLSach.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T20:12:58.999Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DatabaseHelper.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\DatabaseHelper.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\DatabaseHelper.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\DatabaseHelper.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\DatabaseHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T19:50:44.038Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "UCAdminTools.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCAdminTools.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCAdminTools.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCAdminTools.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T20:11:49.691Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "UCAdminTools.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCAdminTools.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCAdminTools.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCAdminTools.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\UCAdminTools.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T09:29:46.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "UCQLNhanVien.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLNhanVien.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLNhanVien.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLNhanVien.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\UCQLNhanVien.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAOoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T09:28:32.936Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "UCQLNhanVien.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLNhanVien.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLNhanVien.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLNhanVien.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T20:13:02.372Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
               "Title": "UCQLKhachHang.cs",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLKhachHang.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLKhachHang.cs",
               "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLKhachHang.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLKhachHang.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLKhachHang.cs",
               "RelativeToolTip": "QuanLy_NhaSach\\UCQLKhachHang.cs",
-              "ViewState": "AgIAAJYAAAAAAAAAAAAIwJ8AAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEUAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:55:24.62Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "frm_Trangchu.cs",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Trangchu.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_Trangchu.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Trangchu.cs",
-              "RelativeToolTip": "QuanLy_NhaSach\\frm_Trangchu.cs",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAIwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:55:02.099Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "frm_Themtaikhoan.cs",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_Themtaikhoan.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs",
-              "RelativeToolTip": "QuanLy_NhaSach\\frm_Themtaikhoan.cs",
-              "ViewState": "AgIAABUAAAAAAAAAAAA1wAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:54:50.226Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "frm_Themtaikhoan.cs [Design]",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_Themtaikhoan.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs [Design]",
-              "RelativeToolTip": "QuanLy_NhaSach\\frm_Themtaikhoan.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:52:25.214Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "frm_Trangchu.cs [Design]",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Trangchu.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_Trangchu.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Trangchu.cs [Design]",
-              "RelativeToolTip": "QuanLy_NhaSach\\frm_Trangchu.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:52:11.114Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "frm_DangNhap.cs [Design]",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_DangNhap.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_DangNhap.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_DangNhap.cs [Design]",
-              "RelativeToolTip": "QuanLy_NhaSach\\frm_DangNhap.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:51:56.394Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-12-08T19:55:24.62Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 13,
-              "Title": "DatabaseHelper.cs",
-              "DocumentMoniker": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\DatabaseHelper.cs",
-              "RelativeDocumentMoniker": "QuanLy_NhaSach\\DatabaseHelper.cs",
-              "ToolTip": "D:\\Code\\C#\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\DatabaseHelper.cs",
-              "RelativeToolTip": "QuanLy_NhaSach\\DatabaseHelper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAABNAAAAAAAAAA==",
+              "Title": "UCQLKhachHang.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLKhachHang.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCQLKhachHang.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCQLKhachHang.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-08T19:50:44.038Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-12-08T19:55:22.361Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "UCNhapSach.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCNhapSach.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCNhapSach.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCNhapSach.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\UCNhapSach.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJkAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T09:27:20.888Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "UCNhapSach.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCNhapSach.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCNhapSach.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCNhapSach.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T09:27:12.044Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "UCBanSach.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCBanSach.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCBanSach.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCBanSach.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\UCBanSach.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMsAAABPAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T09:26:58.669Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "UCBanSach.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCBanSach.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\UCBanSach.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\UCBanSach.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T19:57:50.066Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "frm_Themtaikhoan.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_Themtaikhoan.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\frm_Themtaikhoan.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACkAAABcAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T19:54:50.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "frm_Themtaikhoan.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_Themtaikhoan.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Themtaikhoan.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T19:52:25.214Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "frm_Trangchu.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Trangchu.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_Trangchu.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Trangchu.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\frm_Trangchu.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAJsAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T19:55:02.099Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "frm_Trangchu.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Trangchu.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_Trangchu.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_Trangchu.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T19:52:11.114Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "frm_DangNhap.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_DangNhap.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_DangNhap.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_DangNhap.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\frm_DangNhap.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T09:25:26.513Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "frm_DangNhap.cs [Design]",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_DangNhap.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\frm_DangNhap.cs",
+              "ToolTip": "E:\\BaiTapNhom\\QuanLyNhaSach_Nhom19-main\\QuanLy_NhaSach\\QuanLy_NhaSach\\frm_DangNhap.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-08T19:51:56.394Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "NotificationHelper.cs",
+              "DocumentMoniker": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\NotificationHelper.cs",
+              "RelativeDocumentMoniker": "QuanLy_NhaSach\\NotificationHelper.cs",
+              "ToolTip": "D:\\Code\\C#\\Full_QLNS\\QuanLy_NhaSach\\QuanLy_NhaSach\\NotificationHelper.cs",
+              "RelativeToolTip": "QuanLy_NhaSach\\NotificationHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-14T09:25:16.206Z"
             }
           ]
         }

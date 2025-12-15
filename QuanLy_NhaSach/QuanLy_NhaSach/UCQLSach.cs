@@ -15,14 +15,13 @@ namespace QuanLy_NhaSach
         public UCQLSach()
         {
             InitializeComponent();
-
             this.VisibleChanged += new EventHandler(UCQLSach_VisibleChanged);
         }
 
         private void UCQLSach_Load(object sender, EventArgs e)
         {
             LoadData();
-            LoadComboBox();
+            LoadComboBoxInput();
             ResetForm();
         }
 
@@ -59,40 +58,84 @@ namespace QuanLy_NhaSach
             if (dgvSach.Columns.Contains("TrangThai")) dgvSach.Columns["TrangThai"].Visible = false;
         }
 
-        private void LoadComboBox()
+        // Tách thành LoadComboBoxInput cho phần nhập liệu và phần Lọc
+        private void LoadComboBoxInput()
         {
-            // 1. Load Thể loại
+            // 1. Load cho Form Nhập (Input)
             cboTheLoai.DataSource = DatabaseHelper.GetDataTable("SELECT * FROM THELOAI WHERE TrangThai = 1");
             cboTheLoai.DisplayMember = "Ten_TheLoai";
             cboTheLoai.ValueMember = "ID_TheLoai";
 
-            // 2. Load Nhà Cung Cấp
             cboNXB.DataSource = DatabaseHelper.GetDataTable("SELECT * FROM NHACUNGCAP WHERE TrangThai = 1");
             cboNXB.DisplayMember = "Ten_Nha_Cung_Cap";
             cboNXB.ValueMember = "Ten_Nha_Cung_Cap";
+
+            // 2. Load cho Form Lọc (Filter) - Thêm mục "Tất cả"
+            DataTable dtTLFilter = DatabaseHelper.GetDataTable("SELECT * FROM THELOAI WHERE TrangThai = 1");
+            DataRow drTL = dtTLFilter.NewRow();
+            drTL["ID_TheLoai"] = -1;
+            drTL["Ten_TheLoai"] = "--- Tất cả Thể loại ---";
+            dtTLFilter.Rows.InsertAt(drTL, 0);
+
+            cboLocTheLoai.DataSource = dtTLFilter;
+            cboLocTheLoai.DisplayMember = "Ten_TheLoai";
+            cboLocTheLoai.ValueMember = "ID_TheLoai";
+            cboLocTheLoai.SelectedIndexChanged += Filter_Changed;
+
+            DataTable dtNXBFilter = DatabaseHelper.GetDataTable("SELECT * FROM NHACUNGCAP WHERE TrangThai = 1");
+            DataRow drNXB = dtNXBFilter.NewRow();
+            drNXB["Ten_Nha_Cung_Cap"] = "--- Tất cả NXB ---";
+            dtNXBFilter.Rows.InsertAt(drNXB, 0);
+
+            cboLocNXB.DataSource = dtNXBFilter;
+            cboLocNXB.DisplayMember = "Ten_Nha_Cung_Cap";
+            cboLocNXB.ValueMember = "Ten_Nha_Cung_Cap";
+            cboLocNXB.SelectedIndexChanged += Filter_Changed;
+        }
+
+        // Hàm xử lý lọc chung
+        private void Filter_Changed(object sender, EventArgs e)
+        {
+            if (dgvSach.DataSource is BindingSource bs)
+            {
+                string filter = "1=1";
+
+                if (!string.IsNullOrEmpty(txtTimKiem.Text))
+                {
+                    string tuKhoa = DatabaseHelper.XoaDau(txtTimKiem.Text.Trim()).ToLower();
+                    filter += string.Format(" AND (TenSach LIKE '%{0}%' OR MaSach LIKE '%{0}%' OR TenSach_KhongDau LIKE '%{1}%')", txtTimKiem.Text, tuKhoa);
+                }
+
+                if (cboLocTheLoai.SelectedValue != null && cboLocTheLoai.SelectedValue.ToString() != "-1")
+                {
+                    filter += $" AND ID_TheLoai = {cboLocTheLoai.SelectedValue}";
+                }
+
+                if (cboLocNXB.SelectedValue != null && cboLocNXB.Text != "--- Tất cả NXB ---")
+                {
+                    filter += $" AND Nha_Xuat_Ban = '{cboLocNXB.SelectedValue}'";
+                }
+
+                bs.Filter = filter;
+            }
         }
 
         private void dgvSach_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
-
             DataGridViewRow row = dgvSach.Rows[e.RowIndex];
 
             txtMaSach.Text = row.Cells["MaSach"].Value?.ToString();
             txtTenSach.Text = row.Cells["TenSach"].Value?.ToString();
             cboTheLoai.SelectedValue = row.Cells["ID_TheLoai"].Value;
             txtTacGia.Text = row.Cells["TacGia"].Value?.ToString();
-
-            // Gán NXB vào ComboBox
             cboNXB.SelectedValue = row.Cells["Nha_Xuat_Ban"].Value?.ToString();
-
             txtGiaNhap.Text = row.Cells["GiaNhap"].Value?.ToString();
             txtGiaBan.Text = row.Cells["GiaBan"].Value?.ToString();
 
             if (row.Cells["SoLuong"].Value != DBNull.Value)
                 numSoLuong.Value = Convert.ToDecimal(row.Cells["SoLuong"].Value);
 
-            // Xử lý hình ảnh
             string path = row.Cells["HinhAnh"].Value?.ToString();
             if (!string.IsNullOrEmpty(path) && File.Exists(path))
             {
@@ -105,8 +148,6 @@ namespace QuanLy_NhaSach
                 _duongDanAnh = "";
             }
 
-            // Khóa mã sách khi sửa
-            txtMaSach.ReadOnly = true;
             btnThem.Enabled = false;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
@@ -115,7 +156,6 @@ namespace QuanLy_NhaSach
         private void btnThem_Click(object sender, EventArgs e)
         {
             if (!ValidateInput()) return;
-
             try
             {
                 SqlParameter[] pars = {
@@ -123,25 +163,17 @@ namespace QuanLy_NhaSach
                     new SqlParameter("@ID_TheLoai", cboTheLoai.SelectedValue),
                     new SqlParameter("@TenSach", txtTenSach.Text),
                     new SqlParameter("@TacGia", txtTacGia.Text),
-                    // Lấy Tên NXB từ ComboBox
                     new SqlParameter("@Nha_Xuat_Ban", cboNXB.SelectedValue != null ? cboNXB.SelectedValue.ToString() : ""),
                     new SqlParameter("@GiaNhap", decimal.Parse(txtGiaNhap.Text)),
                     new SqlParameter("@GiaBan", decimal.Parse(txtGiaBan.Text)),
                     new SqlParameter("@SoLuong", (int)numSoLuong.Value),
                     new SqlParameter("@HinhAnh", _duongDanAnh)
                 };
-
-                // GỌI HELPER
                 DatabaseHelper.ExecuteNonQuery("SP_ThemSach", pars);
-
                 MessageBox.Show("Thêm thành công!");
-                LoadData();
-                ResetForm();
+                LoadData(); ResetForm();
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
+            catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -158,12 +190,9 @@ namespace QuanLy_NhaSach
                     new SqlParameter("@GiaBan", decimal.Parse(txtGiaBan.Text)),
                     new SqlParameter("@HinhAnh", _duongDanAnh)
                 };
-
                 DatabaseHelper.ExecuteNonQuery("SP_SuaSach", pars);
-
                 MessageBox.Show("Cập nhật thành công!");
-                LoadData();
-                ResetForm();
+                LoadData(); ResetForm();
             }
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
@@ -176,10 +205,8 @@ namespace QuanLy_NhaSach
                 {
                     SqlParameter[] pars = { new SqlParameter("@MaSach", txtMaSach.Text) };
                     DatabaseHelper.ExecuteNonQuery("SP_XoaSach", pars);
-
                     MessageBox.Show("Đã xóa sách!");
-                    LoadData();
-                    ResetForm();
+                    LoadData(); ResetForm();
                 }
                 catch (Exception ex) { MessageBox.Show(ex.Message); }
             }
@@ -187,15 +214,7 @@ namespace QuanLy_NhaSach
 
         private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
-            string tuKhoa = DatabaseHelper.XoaDau(txtTimKiem.Text.Trim()).ToLower();
-            string filter = string.Format("TenSach LIKE '%{0}%' OR MaSach LIKE '%{0}%' OR TenSach_KhongDau LIKE '%{1}%'",
-                                          txtTimKiem.Text, tuKhoa);
-
-            // Lọc trực tiếp trên BindingSource
-            if (dgvSach.DataSource is BindingSource bs)
-            {
-                bs.Filter = filter;
-            }
+            Filter_Changed(sender, e);
         }
 
         private void btnChonAnh_Click(object sender, EventArgs e)
@@ -216,8 +235,10 @@ namespace QuanLy_NhaSach
 
         private void ResetForm()
         {
-            txtMaSach.ReadOnly = false;
-            txtMaSach.Clear();
+            // Tự sinh mã Sách
+            txtMaSach.Text = DatabaseHelper.TaoMaTuDong("S", "SACH", "MaSach");
+            txtMaSach.ReadOnly = true;
+
             txtTenSach.Clear();
             txtTacGia.Clear();
             cboNXB.SelectedIndex = -1;

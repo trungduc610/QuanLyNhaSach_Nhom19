@@ -35,6 +35,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.ReportViewer.WebDesign, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.WebForms.150.1652.0\lib\net40\Microsoft.ReportViewer.WebDesign.dll</HintPath>
@@ -63,20 +66,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseHelper.cs" />
-    <Compile Include="DataSetHoaDon.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSetHoaDon.xsd</DependentUpon>
-    </Compile>
     <Compile Include="frm_DangNhap.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frm_DangNhap.Designer.cs">
       <DependentUpon>frm_DangNhap.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frm_InHoaDon.cs" />
-    <Compile Include="frm_InHoaDon.Designer.cs">
-      <DependentUpon>frm_InHoaDon.cs</DependentUpon>
     </Compile>
     <Compile Include="frm_Themtaikhoan.cs">
       <SubType>Form</SubType>
@@ -160,11 +154,13 @@
     <EmbeddedResource Include="frm_Trangchu.resx">
       <DependentUpon>frm_Trangchu.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="HoaDon.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UCAdminTools.resx">
+      <DependentUpon>UCAdminTools.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UCBanSach.resx">
       <DependentUpon>UCBanSach.cs</DependentUpon>
@@ -187,17 +183,7 @@
     <EmbeddedResource Include="UCTKDoanhThu.resx">
       <DependentUpon>UCTKDoanhThu.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="DataSetHoaDon.xsc">
-      <DependentUpon>DataSetHoaDon.xsd</DependentUpon>
-    </None>
-    <None Include="DataSetHoaDon.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSetHoaDon.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="DataSetHoaDon.xss">
-      <DependentUpon>DataSetHoaDon.xsd</DependentUpon>
-    </None>
+    <None Include="app.manifest" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -15,7 +15,7 @@
         private void InitializeComponent()
         {
             this.grpThongTin = new System.Windows.Forms.GroupBox();
-            this.btnAdminTools = new System.Windows.Forms.Button(); // Nút mới
+            this.btnAdminTools = new System.Windows.Forms.Button();
             this.lblQuyen = new System.Windows.Forms.Label();
             this.lblTenDN = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,7 +44,7 @@
             this.grpThongTin.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.grpThongTin.Location = new System.Drawing.Point(364, 50);
             this.grpThongTin.Name = "grpThongTin";
-            this.grpThongTin.Size = new System.Drawing.Size(500, 220); // Tăng chiều cao để chứa nút mới
+            this.grpThongTin.Size = new System.Drawing.Size(500, 220);
             this.grpThongTin.TabIndex = 0;
             this.grpThongTin.TabStop = false;
             this.grpThongTin.Text = "Thông tin tài khoản";
@@ -56,13 +56,13 @@
             this.btnAdminTools.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnAdminTools.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
             this.btnAdminTools.ForeColor = System.Drawing.Color.White;
-            this.btnAdminTools.Location = new System.Drawing.Point(30, 160); // Vị trí nút Admin Tools
+            this.btnAdminTools.Location = new System.Drawing.Point(30, 160);
             this.btnAdminTools.Name = "btnAdminTools";
             this.btnAdminTools.Size = new System.Drawing.Size(440, 40);
             this.btnAdminTools.TabIndex = 5;
             this.btnAdminTools.Text = "CÔNG CỤ QUẢN TRỊ (Backup/Restore)";
             this.btnAdminTools.UseVisualStyleBackColor = false;
-            this.btnAdminTools.Visible = false; // Mặc định ẩn
+            this.btnAdminTools.Visible = false;
             this.btnAdminTools.Click += new System.EventHandler(this.btnAdminTools_Click);
             // 
             // lblQuyen
@@ -72,7 +72,7 @@
             this.lblQuyen.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.lblQuyen.Location = new System.Drawing.Point(200, 110);
             this.lblQuyen.Name = "lblQuyen";
-            this.lblQuyen.Size = new System.Drawing.Size(111, 28);
+            this.lblQuyen.Size = new System.Drawing.Size(89, 28);
             this.lblQuyen.TabIndex = 4;
             this.lblQuyen.Text = "[QUYEN]";
             // 
@@ -83,7 +83,7 @@
             this.lblTenDN.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(52)))), ((int)(((byte)(152)))), ((int)(((byte)(219)))));
             this.lblTenDN.Location = new System.Drawing.Point(200, 60);
             this.lblTenDN.Name = "lblTenDN";
-            this.lblTenDN.Size = new System.Drawing.Size(117, 28);
+            this.lblTenDN.Size = new System.Drawing.Size(88, 28);
             this.lblTenDN.TabIndex = 3;
             this.lblTenDN.Text = "[TENDN]";
             // 
@@ -93,7 +93,7 @@
             this.label3.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.label3.Location = new System.Drawing.Point(30, 110);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 28);
+            this.label3.Size = new System.Drawing.Size(73, 28);
             this.label3.TabIndex = 2;
             this.label3.Text = "Quyền:";
             // 
@@ -111,7 +111,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 12F);
             this.label1.Location = new System.Drawing.Point(30, 60);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(142, 28);
+            this.label1.Size = new System.Drawing.Size(132, 28);
             this.label1.TabIndex = 0;
             this.label1.Text = "Đang nhập là:";
             // 
@@ -125,7 +125,7 @@
             this.grpDoiMK.Controls.Add(this.txtMKCu);
             this.grpDoiMK.Controls.Add(this.label4);
             this.grpDoiMK.Font = new System.Drawing.Font("Segoe UI", 11F, System.Drawing.FontStyle.Bold);
-            this.grpDoiMK.Location = new System.Drawing.Point(364, 300); // Điều chỉnh vị trí Y
+            this.grpDoiMK.Location = new System.Drawing.Point(364, 300);
             this.grpDoiMK.Name = "grpDoiMK";
             this.grpDoiMK.Size = new System.Drawing.Size(500, 350);
             this.grpDoiMK.TabIndex = 1;
@@ -161,7 +161,7 @@
             this.label6.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.label6.Location = new System.Drawing.Point(15, 190);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(183, 25);
+            this.label6.Size = new System.Drawing.Size(170, 25);
             this.label6.TabIndex = 4;
             this.label6.Text = "Nhập lại mật khẩu:";
             // 
@@ -180,7 +180,7 @@
             this.label5.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.label5.Location = new System.Drawing.Point(15, 120);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(134, 25);
+            this.label5.Size = new System.Drawing.Size(132, 25);
             this.label5.TabIndex = 2;
             this.label5.Text = "Mật khẩu mới:";
             // 
@@ -199,14 +199,14 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 11F);
             this.label4.Location = new System.Drawing.Point(15, 50);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(121, 25);
+            this.label4.Size = new System.Drawing.Size(120, 25);
             this.label4.TabIndex = 0;
             this.label4.Text = "Mật khẩu cũ:";
             // 
             // UCTaiKhoan
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.grpDoiMK);
             this.Controls.Add(this.grpThongTin);
             this.Name = "UCTaiKhoan";

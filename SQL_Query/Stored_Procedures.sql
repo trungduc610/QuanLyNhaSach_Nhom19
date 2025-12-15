@@ -1,7 +1,7 @@
 ﻿USE NhaSach;
 GO
 
--- === 1. BACKUP & RESTORE (Yêu cầu bắt buộc) ===
+-- === 1. BACKUP & RESTORE ===
 CREATE OR ALTER PROCEDURE SP_BackupDatabase
     @DuongDan NVARCHAR(500)
 AS
@@ -35,49 +35,46 @@ GO
 USE NhaSach;
 GO
 
--- === 2. IN HÓA ĐƠN (Cho ReportViewer) ===
-CREATE OR ALTER PROCEDURE SP_GetHoaDonDeIn
-    @MaHoaDon CHAR(10)
-AS
-BEGIN
-    SELECT 
-        HD.Ma_Hoa_Don, HD.NgayLap, NV.Ten_Nhan_Vien,
-        KH.Ten_Khach_Hang, KH.DiaChi AS DiaChiKH, KH.So_Dien_Thoai,
-        S.TenSach, CT.SoLuong, CT.DonGia, CT.ThanhTien, HD.TongTien
-    FROM HOADON HD
-    JOIN NHANVIEN NV ON HD.Ma_Nhan_Vien = NV.Ma_Nhan_Vien
-    JOIN KHACHHANG KH ON HD.Ma_Khach_Hang = KH.Ma_Khach_Hang
-    JOIN CHITIETHOADON CT ON HD.Ma_Hoa_Don = CT.Ma_Hoa_Don
-    JOIN SACH S ON CT.MaSach = S.MaSach
-    WHERE HD.Ma_Hoa_Don = @MaHoaDon;
-END
-GO
-
--- === 3. BÁO CÁO DOANH THU (Cho Chart) ===
+-- === 2. BÁO CÁO DOANH THU ===
 CREATE OR ALTER PROCEDURE SP_BaoCaoTaiChinh
-    @TuNgay DATE, @DenNgay DATE
+    @NgayBatDau DATE,
+    @NgayKetThuc DATE
 AS
 BEGIN
+    -- LỚP BẢO VỆ NGÀY: Tính ngày kết thúc TỚI CUỐI GIÂY CUỐI CÙNG (bằng cách dùng < ngày tiếp theo)
+    DECLARE @NgayKetThucInclusive DATETIME = DATEADD(day, 1, @NgayKetThuc);
+    
+    -- 1. TÍNH TỔNG GIÁ VỐN
+    DECLARE @TongGiaVon DECIMAL(18, 2);
+    SELECT @TongGiaVon = SUM(ISNULL(CTPN.SoLuongNhap, 0) * ISNULL(CTPN.DonGiaNhap, 0))
+    FROM PHIEUNHAPHANG PN
+    JOIN CHITIETPHIEUNHAP CTPN ON PN.MaPhieuNhap = CTPN.MaPhieuNhap
+    WHERE PN.NgayNhap >= @NgayBatDau 
+      AND PN.NgayNhap < @NgayKetThucInclusive -- Bao trọn ngày cuối
+      AND PN.TrangThai = 1;
+
+    -- 2. TÍNH TỔNG DOANH THU
+    DECLARE @TongDoanhThu DECIMAL(18, 2);
+    SELECT @TongDoanhThu = SUM(ISNULL(CTHD.SoLuong, 0) * ISNULL(CTHD.DonGia, 0))
+    FROM HOADON HD
+    JOIN CHITIETHOADON CTHD ON HD.Ma_Hoa_Don = CTHD.Ma_Hoa_Don
+    WHERE HD.NgayLap >= @NgayBatDau 
+      AND HD.NgayLap < @NgayKetThucInclusive -- Bao trọn ngày cuối
+      AND HD.TrangThai = 1;
+
+    -- 3. TÍNH LỢI NHUẬN GỘP
+    DECLARE @LoiNhuanGop DECIMAL(18, 2);
+    SET @LoiNhuanGop = ISNULL(@TongDoanhThu, 0) - ISNULL(@TongGiaVon, 0);
+
+    -- 4. TRẢ KẾT QUẢ VỀ
     SELECT 
-        A.Ngay, ISNULL(B.DoanhThu, 0) as DoanhThu, ISNULL(C.ChiPhi, 0) as ChiPhi
-    FROM (
-        SELECT DISTINCT CAST(NgayLap AS DATE) as Ngay FROM HOADON WHERE NgayLap BETWEEN @TuNgay AND @DenNgay
-        UNION 
-        SELECT DISTINCT CAST(NgayNhap AS DATE) as Ngay FROM PHIEUNHAPHANG WHERE NgayNhap BETWEEN @TuNgay AND @DenNgay
-    ) A
-    LEFT JOIN (
-        SELECT CAST(NgayLap AS DATE) as Ngay, SUM(TongTien) as DoanhThu 
-        FROM HOADON WHERE TrangThai = 1 GROUP BY CAST(NgayLap AS DATE)
-    ) B ON A.Ngay = B.Ngay
-    LEFT JOIN (
-        SELECT CAST(NgayNhap AS DATE) as Ngay, SUM(TongTienNhap) as ChiPhi 
-        FROM PHIEUNHAPHANG WHERE TrangThai = 1 GROUP BY CAST(NgayNhap AS DATE)
-    ) C ON A.Ngay = C.Ngay
-    ORDER BY A.Ngay;
+        ISNULL(@TongDoanhThu, 0) AS TongDoanhThu, 
+        ISNULL(@TongGiaVon, 0) AS TongGiaVon, 
+        @LoiNhuanGop AS LoiNhuanGop;
 END
 GO
 
--- === 4. CÁC THỦ TỤC QUẢN LÝ (CRUD - Có xóa mềm) ===
+-- === 3. CÁC THỦ TỤC QUẢN LÝ (CRUD - Có xóa mềm) ===
 
 -- Lấy Sách (Chỉ lấy sách đang hoạt động)
 CREATE OR ALTER PROCEDURE SP_LayDanhSachSach
@@ -346,45 +343,6 @@ BEGIN
 END
 GO
 
--- THỦ TỤC LẤY BÁO CÁO TÀI CHÍNH THEO KHOẢNG THỜI GIAN
-CREATE OR ALTER PROCEDURE SP_BaoCaoTaiChinh
-    @NgayBatDau DATE,
-    @NgayKetThuc DATE
-AS
-BEGIN
-    -- LỚP BẢO VỆ NGÀY: Tính ngày kết thúc TỚI CUỐI GIÂY CUỐI CÙNG (bằng cách dùng < ngày tiếp theo)
-    DECLARE @NgayKetThucInclusive DATETIME = DATEADD(day, 1, @NgayKetThuc);
-    
-    -- 1. TÍNH TỔNG GIÁ VỐN
-    DECLARE @TongGiaVon DECIMAL(18, 2);
-    SELECT @TongGiaVon = SUM(ISNULL(CTPN.SoLuongNhap, 0) * ISNULL(CTPN.DonGiaNhap, 0))
-    FROM PHIEUNHAPHANG PN
-    JOIN CHITIETPHIEUNHAP CTPN ON PN.MaPhieuNhap = CTPN.MaPhieuNhap
-    WHERE PN.NgayNhap >= @NgayBatDau 
-      AND PN.NgayNhap < @NgayKetThucInclusive -- Bao trọn ngày cuối
-      AND PN.TrangThai = 1;
-
-    -- 2. TÍNH TỔNG DOANH THU
-    DECLARE @TongDoanhThu DECIMAL(18, 2);
-    SELECT @TongDoanhThu = SUM(ISNULL(CTHD.SoLuong, 0) * ISNULL(CTHD.DonGia, 0))
-    FROM HOADON HD
-    JOIN CHITIETHOADON CTHD ON HD.Ma_Hoa_Don = CTHD.Ma_Hoa_Don
-    WHERE HD.NgayLap >= @NgayBatDau 
-      AND HD.NgayLap < @NgayKetThucInclusive -- Bao trọn ngày cuối
-      AND HD.TrangThai = 1;
-
-    -- 3. TÍNH LỢI NHUẬN GỘP
-    DECLARE @LoiNhuanGop DECIMAL(18, 2);
-    SET @LoiNhuanGop = ISNULL(@TongDoanhThu, 0) - ISNULL(@TongGiaVon, 0);
-
-    -- 4. TRẢ KẾT QUẢ VỀ
-    SELECT 
-        ISNULL(@TongDoanhThu, 0) AS TongDoanhThu, 
-        ISNULL(@TongGiaVon, 0) AS TongGiaVon, 
-        @LoiNhuanGop AS LoiNhuanGop;
-END
-GO
-
 CREATE OR ALTER PROCEDURE SP_BaoCaoChiTietDoanhThu
     @NgayBatDau DATE,
     @NgayKetThuc DATE
@@ -566,5 +524,84 @@ BEGIN
     LEFT JOIN KHACHHANG KH ON HD.Ma_Khach_Hang = KH.Ma_Khach_Hang
     JOIN SACH S ON CTHD.MaSach = S.MaSach
     WHERE HD.Ma_Hoa_Don = @Ma_Hoa_Don;
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_LayLichSuMuaHang
+    @Ma_Khach_Hang CHAR(10)
+AS
+BEGIN
+    SELECT 
+        HD.Ma_Hoa_Don AS [Mã HĐ],
+        HD.NgayLap AS [Ngày Lập],
+        S.TenSach AS [Tên Sách],
+        CTHD.SoLuong AS [SL],
+        CTHD.DonGia AS [Đơn Giá],
+        (CTHD.SoLuong * CTHD.DonGia) AS [Thành Tiền]
+    FROM HOADON HD
+    JOIN CHITIETHOADON CTHD ON HD.Ma_Hoa_Don = CTHD.Ma_Hoa_Don
+    JOIN SACH S ON CTHD.MaSach = S.MaSach
+    WHERE HD.Ma_Khach_Hang = @Ma_Khach_Hang 
+      AND HD.TrangThai = 1
+    ORDER BY HD.NgayLap DESC;
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_LayThongTinHoaDon_DeIn
+    @MaHoaDon VARCHAR(20)
+AS
+BEGIN
+    SELECT 
+        H.NgayLap,
+        NV.Ten_Nhan_Vien,
+        KH.Ten_Khach_Hang
+    FROM HOADON H
+    JOIN NHANVIEN NV ON H.Ma_Nhan_Vien = NV.Ma_Nhan_Vien
+    JOIN KHACHHANG KH ON H.Ma_Khach_Hang = KH.Ma_Khach_Hang
+    WHERE H.Ma_Hoa_Don = @MaHoaDon
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_LayChiTietHoaDon_DeIn
+    @MaHoaDon VARCHAR(20)
+AS
+BEGIN
+    SELECT 
+        S.TenSach,
+        CT.SoLuong,
+        CT.DonGia,
+        (CT.SoLuong * CT.DonGia) AS ThanhTien
+    FROM CHITIETHOADON CT
+    JOIN SACH S ON CT.MaSach = S.MaSach
+    WHERE CT.Ma_Hoa_Don = @MaHoaDon
+END
+
+CREATE OR ALTER PROCEDURE SP_LayThongTinPhieuNhap_DeIn
+    @MaPhieuNhap VARCHAR(20)
+AS
+BEGIN
+    SELECT 
+        PN.NgayNhap,
+        ISNULL(NV.Ten_Nhan_Vien, N'Không xác định') AS Ten_Nhan_Vien,
+        ISNULL(NCC.Ten_Nha_Cung_Cap, N'NCC Vãng lai') AS Ten_Nha_Cung_Cap
+    FROM PHIEUNHAPHANG PN
+    LEFT JOIN NHANVIEN NV ON PN.Ma_Nhan_Vien = NV.Ma_Nhan_Vien
+    LEFT JOIN NHACUNGCAP NCC ON PN.Ma_Nha_Cung_Cap = NCC.Ma_Nha_Cung_Cap
+    WHERE PN.MaPhieuNhap = @MaPhieuNhap
+END
+GO
+
+CREATE OR ALTER PROCEDURE SP_LayChiTietPhieuNhap_DeIn
+    @MaPhieuNhap VARCHAR(20)
+AS
+BEGIN
+    SELECT 
+        S.TenSach,
+        CT.SoLuongNhap,
+        CT.DonGiaNhap,
+        (CT.SoLuongNhap * CT.DonGiaNhap) AS ThanhTien
+    FROM CHITIETPHIEUNHAP CT
+    JOIN SACH S ON CT.MaSach = S.MaSach
+    WHERE CT.MaPhieuNhap = @MaPhieuNhap
 END
 GO

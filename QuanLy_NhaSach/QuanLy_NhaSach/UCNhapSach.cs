@@ -9,7 +9,7 @@ namespace QuanLy_NhaSach
     {
         private string _maNV;
         private string _tenNV;
-        private DataTable _dtChiTiet; // Bảng tạm chứa danh sách nhập
+        private DataTable _dtChiTiet;
 
         public UCNhapSach(string maNV, string tenNV)
         {
@@ -62,7 +62,7 @@ namespace QuanLy_NhaSach
 
             dgvChiTietNhap.DataSource = _dtChiTiet;
 
-            // Thêm nút Xóa nếu chưa có
+            // Thêm nút Xóa
             if (dgvChiTietNhap.Columns["colXoa"] == null)
             {
                 DataGridViewButtonColumn btnXoa = new DataGridViewButtonColumn();
@@ -151,7 +151,7 @@ namespace QuanLy_NhaSach
                     using (SqlCommand cmd = new SqlCommand(sqlPN, conn, trans))
                     {
                         cmd.Parameters.AddWithValue("@MaPN", maPN);
-                        cmd.Parameters.AddWithValue("@MaNV", _maNV); // Dùng biến toàn cục đã truyền vào
+                        cmd.Parameters.AddWithValue("@MaNV", _maNV);
                         cmd.Parameters.AddWithValue("@MaNCC", cboNhaCungCap.SelectedValue);
                         cmd.ExecuteNonQuery();
                     }

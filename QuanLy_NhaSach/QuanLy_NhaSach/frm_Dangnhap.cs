@@ -61,7 +61,7 @@ namespace QuanLy_NhaSach
                 // 2. Gọi DatabaseHelper (Code ngắn gọn, sạch sẽ)
                 SqlParameter[] pars = {
                     new SqlParameter("@TenDangNhap", tenDN),
-                    new SqlParameter("@MatKhau", matKhau) // Sau này sẽ thêm hàm HashPassword(matKhau) vào đây
+                    new SqlParameter("@MatKhau", matKhau)
                 };
 
                 DataTable dt = DatabaseHelper.GetDataTable("SP_DangNhap", pars);
@@ -80,7 +80,7 @@ namespace QuanLy_NhaSach
                     this.Hide();
                     frmMain.ShowDialog();
 
-                    // Khi Form chính đóng thì hiện lại Form đăng nhập (để đăng nhập người khác)
+                    // Khi Form chính đóng thì hiện lại Form đăng nhập
                     this.Show();
                     txtMatKhau.Text = "";
                 }

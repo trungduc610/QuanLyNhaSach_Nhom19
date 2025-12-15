@@ -37,7 +37,7 @@
             this.grpBackup.Controls.Add(this.txtBackupPath);
             this.grpBackup.Controls.Add(this.label1);
             this.grpBackup.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.grpBackup.Location = new System.Drawing.Point(364, 50); // Căn giữa
+            this.grpBackup.Location = new System.Drawing.Point(364, 50);
             this.grpBackup.Name = "grpBackup";
             this.grpBackup.Size = new System.Drawing.Size(500, 250);
             this.grpBackup.TabIndex = 0;
@@ -86,7 +86,7 @@
             this.label1.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label1.Location = new System.Drawing.Point(15, 65);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(325, 23);
+            this.label1.Size = new System.Drawing.Size(313, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "Chọn thư mục lưu trữ file sao lưu (.bak):";
             // 
@@ -97,7 +97,7 @@
             this.grpRestore.Controls.Add(this.txtRestorePath);
             this.grpRestore.Controls.Add(this.label2);
             this.grpRestore.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.grpRestore.Location = new System.Drawing.Point(364, 330); // Căn giữa
+            this.grpRestore.Location = new System.Drawing.Point(364, 330);
             this.grpRestore.Name = "grpRestore";
             this.grpRestore.Size = new System.Drawing.Size(500, 250);
             this.grpRestore.TabIndex = 1;
@@ -146,7 +146,7 @@
             this.label2.Font = new System.Drawing.Font("Segoe UI", 10F);
             this.label2.Location = new System.Drawing.Point(15, 65);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(342, 23);
+            this.label2.Size = new System.Drawing.Size(319, 23);
             this.label2.TabIndex = 0;
             this.label2.Text = "Chọn file sao lưu cần phục hồi (.bak file):";
             // 
@@ -157,8 +157,8 @@
             // 
             // UCAdminTools
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.Controls.Add(this.grpRestore);
             this.Controls.Add(this.grpBackup);
             this.Name = "UCAdminTools";

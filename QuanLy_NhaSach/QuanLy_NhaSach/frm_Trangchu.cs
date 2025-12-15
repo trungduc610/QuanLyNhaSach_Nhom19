@@ -111,9 +111,6 @@ namespace QuanLy_NhaSach
             {
                 _ucQLSach = new UCQLSach();
             }
-            // Riêng phần Quản lý Sách, có thể bạn muốn mỗi lần vào là dữ liệu mới nhất
-            // Nếu muốn reload lại data mỗi khi bấm, hãy thêm dòng này:
-            // _ucQLSach.LoadLaiDuLieu(); (Bạn tự viết hàm này bên UCQLSach nếu cần)
 
             HienThiUserControl(_ucQLSach, btnSach);
         }
@@ -122,12 +119,9 @@ namespace QuanLy_NhaSach
         {
             if (_ucTaiKhoan == null)
             {
-                // Kiểm tra xem UCTaiKhoan của bạn Constructor nhận tham số gì?
-                // Theo file cũ là: public UCTaiKhoan(string tenDangNhap, string quyen)
                 _ucTaiKhoan = new UCTaiKhoan(_tenDangNhap, _quyen);
             }
 
-            // Reset màu nút Tài khoản (nếu chưa có trong hàm chung)
             btnTaiKhoan.BackColor = Color.Transparent;
 
             HienThiUserControl(_ucTaiKhoan, btnTaiKhoan);
@@ -153,15 +147,12 @@ namespace QuanLy_NhaSach
 
         private void btnThongKe_Click(object sender, EventArgs e)
         {
-            // Thống kê thì NÊN tạo mới mỗi lần bấm để cập nhật số liệu mới nhất
-            // Hoặc dùng cache nhưng gọi hàm Reload
             if (_ucTKDoanhThu == null)
             {
                 _ucTKDoanhThu = new UCTKDoanhThu();
             }
             else
             {
-                // _ucTKDoanhThu.LoadDuLieu(); // Giả sử bạn có hàm này để refresh
             }
             HienThiUserControl(_ucTKDoanhThu, btnThongKe);
         }

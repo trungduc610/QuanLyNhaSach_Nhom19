@@ -55,7 +55,7 @@ namespace QuanLy_NhaSach
             if (dgvKhachHang.Columns.Contains("TenKhachHang_KhongDau")) dgvKhachHang.Columns["TenKhachHang_KhongDau"].Visible = false;
         }
 
-        // --- 2. BINDING DỮ LIỆU ---
+        // --- 2. BINDING DỮ LIỆU & LỊCH SỬ MUA ---
         private void dgvKhachHang_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex < 0) return;
@@ -67,8 +67,17 @@ namespace QuanLy_NhaSach
             txtEmail.Text = row.Cells["Email"].Value?.ToString();
             txtDiaChi.Text = row.Cells["DiaChi"].Value?.ToString();
 
-            // Khóa mã
-            txtMaKH.ReadOnly = true;
+            // Load Lịch sử mua hàng
+            try
+            {
+                SqlParameter[] pars = { new SqlParameter("@Ma_Khach_Hang", txtMaKH.Text) };
+                // Gọi SP lấy lịch sử
+                DataTable dtLichSu = DatabaseHelper.GetDataTable("SP_LayLichSuMuaHang", pars);
+                dgvLichSuMua.DataSource = dtLichSu;
+            }
+            catch { }
+
+            // Khóa nút thêm, mở nút sửa/xóa
             btnThem.Enabled = false;
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
@@ -156,12 +165,17 @@ namespace QuanLy_NhaSach
 
         private void ResetForm()
         {
-            txtMaKH.ReadOnly = false;
-            txtMaKH.Clear();
+            // Tự động sinh mã KH và KHÓA ô nhập
+            txtMaKH.Text = DatabaseHelper.TaoMaTuDong("KH", "KHACHHANG", "Ma_Khach_Hang");
+            txtMaKH.ReadOnly = true;
+
             txtTenKH.Clear();
             txtSDT.Clear();
             txtEmail.Clear();
             txtDiaChi.Clear();
+
+            // Xóa bảng lịch sử
+            dgvLichSuMua.DataSource = null;
 
             btnThem.Enabled = true;
             btnSua.Enabled = false;

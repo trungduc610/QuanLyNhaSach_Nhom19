@@ -33,7 +33,7 @@
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(26)))), ((int)(((byte)(32)))), ((int)(((byte)(40)))));
             this.label1.Location = new System.Drawing.Point(80, 20);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(199, 32);
+            this.label1.Size = new System.Drawing.Size(201, 32);
             this.label1.TabIndex = 0;
             this.label1.Text = "CẤP TÀI KHOẢN";
             // 
@@ -140,8 +140,8 @@
             // 
             // frm_Themtaikhoan
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(120F, 120F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.ClientSize = new System.Drawing.Size(360, 380);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cboQuyen);

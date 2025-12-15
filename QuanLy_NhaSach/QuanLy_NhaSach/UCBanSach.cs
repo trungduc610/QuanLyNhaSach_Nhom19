@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data;
-using System.Data.SqlClient; // Để dùng Transaction
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace QuanLy_NhaSach
@@ -31,7 +31,7 @@ namespace QuanLy_NhaSach
         private void LoadKhachHang()
         {
             string query = "SELECT Ma_Khach_Hang, Ten_Khach_Hang FROM KHACHHANG WHERE TrangThai = 1";
-            // Gọi Helper lấy bảng, không cần viết SqlConnection nữa
+            // Gọi Helper lấy bảng
             cboKhachHang.DataSource = DatabaseHelper.GetDataTable(query);
             cboKhachHang.DisplayMember = "Ten_Khach_Hang";
             cboKhachHang.ValueMember = "Ma_Khach_Hang";
@@ -189,12 +189,6 @@ namespace QuanLy_NhaSach
                     return;
                 }
             }
-
-            //if (MessageBox.Show("Bạn có muốn in hóa đơn không?", "Thành công", MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.Yes)
-            //{
-            //    frm_InHoaDon frmIn = new frm_InHoaDon(maHD);
-            //    frmIn.ShowDialog();
-            //}
 
             _dtGioHang.Rows.Clear();
             lblTongTien.Text = "0 VNĐ";

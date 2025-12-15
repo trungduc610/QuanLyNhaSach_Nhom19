@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.Drawing; // Cần thiết để dùng Size
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace QuanLy_NhaSach
@@ -29,7 +29,7 @@ namespace QuanLy_NhaSach
             txtMKMoi.UseSystemPasswordChar = true;
             txtNhapLaiMK.UseSystemPasswordChar = true;
 
-            // === LOGIC MỚI: PHÂN QUYỀN NÚT ADMIN ===
+            // === PHÂN QUYỀN NÚT ADMIN ===
             if (_quyen == "Admin")
             {
                 btnAdminTools.Visible = true;

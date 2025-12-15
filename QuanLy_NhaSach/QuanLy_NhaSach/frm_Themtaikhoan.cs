@@ -35,7 +35,7 @@ namespace QuanLy_NhaSach
                     new SqlParameter("@Quyen", cboQuyen.Text)
                 };
 
-                // Gọi SP_TaoTaiKhoan (đã có trong file SQL số 2)
+                // Gọi SP_TaoTaiKhoan
                 DatabaseHelper.ExecuteNonQuery("SP_TaoTaiKhoan", pars);
 
                 MessageBox.Show("Cấp tài khoản thành công!", "Thông báo");
